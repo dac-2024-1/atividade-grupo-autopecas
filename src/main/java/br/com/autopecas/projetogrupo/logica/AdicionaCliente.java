@@ -7,7 +7,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class AdicionaCliente implements Logica{
+public class AdicionaCliente implements Logica {
     @Override
     public void executa(HttpServletRequest req, HttpServletResponse res) throws Exception {
         String nome = req.getParameter("nome");

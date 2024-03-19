@@ -16,7 +16,7 @@ public class ControllerServlet extends HttpServlet {
         String nomeDaClasse = "br.com.autopecas.projetogrupo.logica." + parametro;
 
         try {
-            Class classe = Class.forName(nomeDaClasse);
+            Class<?> classe = Class.forName(nomeDaClasse);
 
             Logica logica = (Logica) classe.newInstance();
             logica.executa(request, response);
