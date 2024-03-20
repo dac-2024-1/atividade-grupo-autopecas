@@ -18,7 +18,7 @@ public class AdicionaCliente implements Logica {
         cliente.setNome(nome);
         cliente.setEndereco(endereco);
         cliente.setTelefone(telefone);
-
+        System.out.println(cliente);
         ClienteDao dao;
         try {
             dao = new ClienteDao();
@@ -27,8 +27,8 @@ public class AdicionaCliente implements Logica {
             e.printStackTrace();
         }
 
-        RequestDispatcher rd = req.getRequestDispatcher("/cliente.jsp");
-        rd.forward(req, res);
+         RequestDispatcher rd = req.getRequestDispatcher("/cliente.jsp");
+         rd.forward(req, res);
     }
 
 }

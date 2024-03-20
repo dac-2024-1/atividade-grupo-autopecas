@@ -83,7 +83,7 @@ public class ClienteDao {
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1, cliente.getTelefone());
             stmt.setString(2, cliente.getEndereco());
-            stmt.setLong(2, cliente.getId());
+            stmt.setLong(3, cliente.getId());
             stmt.execute();
             stmt.close();
         } catch (SQLException e) {
