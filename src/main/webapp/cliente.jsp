@@ -74,6 +74,9 @@
         }
         .delete-button:hover {
             background-color: teal;
+        }
+
+        .delete-button:hover svg{
             stroke: white;
         }
     </style>

@@ -77,7 +77,7 @@ public class ClienteDao {
     }
 
     public void atualizaCliente(Cliente cliente) {
-        String sql = "update contatos set telefone=?, endereco=? where id=?";
+        String sql = "update cliente set telefone=?, endereco=? where id=?";
 
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
