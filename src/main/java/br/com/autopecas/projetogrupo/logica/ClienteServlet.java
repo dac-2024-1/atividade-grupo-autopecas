@@ -4,12 +4,18 @@ import br.com.autopecas.projetogrupo.dao.ClienteDao;
 import br.com.autopecas.projetogrupo.entidades.Cliente;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
-public class AdicionaCliente implements Logica {
+@WebServlet(name = "Cliente", value = "/cliente")
+public class ClienteServlet extends HttpServlet {
+
     @Override
-    public void executa(HttpServletRequest req, HttpServletResponse res) throws Exception {
+    protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         String nome = req.getParameter("nome");
         String endereco = req.getParameter("endereco");
         String telefone = req.getParameter("telefone");
@@ -27,7 +33,19 @@ public class AdicionaCliente implements Logica {
             e.printStackTrace();
         }
 
-         res.sendRedirect("cliente.jsp");
+        res.sendRedirect("cliente");
     }
 
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+        ClienteDao dao;
+        try {
+            dao = new ClienteDao();
+            req.setAttribute("clientes", dao.buscaTodosClientes());
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        req.getRequestDispatcher("/cliente.jsp").forward(req, res);
+    }
 }

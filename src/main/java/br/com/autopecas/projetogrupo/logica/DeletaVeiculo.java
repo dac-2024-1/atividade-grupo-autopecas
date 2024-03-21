@@ -18,7 +18,6 @@ public class DeletaVeiculo implements Logica{
             e.printStackTrace();
         }
 
-        RequestDispatcher rd = req.getRequestDispatcher("/cliente.jsp");
-        rd.forward(req, res);
+        res.sendRedirect("veiculo");
     }
 }

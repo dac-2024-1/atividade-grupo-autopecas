@@ -105,7 +105,7 @@
 <main class="container">
     <div class="content">
         <h1 class="title">Cadastrar veiculo</h1>
-        <form action="mvc" method="POST" class="form">
+        <form action="veiculo" method="POST" class="form">
             <label for="marca">Marca:</label>
             <input class="input" type="text" id="marca" name="marca" required/>
             <label for="modelo">Modelo:</label>
@@ -116,16 +116,13 @@
             <input class="input" type="text" id="placa" name="placa" required/>
             <label for="idcliente">Id do cliente:</label>
             <input class="input" type="text" id="idcliente" name="idcliente" required/>
-            <input type="hidden" name="logica" value="AdicionaVeiculo"/>
             <input type="submit" value="Cadastrar" class="submit"/>
         </form>
     </div>
     <div class="content" id="col2">
         <div>
-            <form action="mvc" method="POST" class="search-form">
-                <input type="text" class="search-input" placeholder="Buscar veículo por id...">
-                <input type="hidden" name="id" value="${veiculo.id}">
-                <input type="hidden" name="logica" value="BuscaVeiculo"/>
+            <form action="veiculo" method="GET" class="search-form">
+                <input type="text" class="search-input" placeholder="Buscar veículo por id..." name="id">
                 <button class="search-button" type="submit">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                          stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
@@ -136,7 +133,7 @@
                 </button>
             </form>
             <c:choose>
-                <c:when test="${param}">
+                <c:when test="${veiculo != null}">
                     pizza.
                     <br />
                 </c:when>
@@ -145,9 +142,8 @@
                     <br />
                 </c:otherwise>
             </c:choose>
-            <jsp:useBean id="dao" class="br.com.autopecas.projetogrupo.dao.VeiculoDao"/>
 
-            <c:forEach var="veiculo" items="${dao.buscaTodosVeiculos()}">
+            <c:forEach var="veiculo" items="${veiculos}">
                 <div class="block">
                     <div>
                         <p>ID: ${veiculo.id}</p>

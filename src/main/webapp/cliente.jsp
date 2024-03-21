@@ -85,20 +85,19 @@
 <main class="container">
     <div class="content">
         <h1 class="title">Cadastrar cliente</h1>
-        <form action="mvc" method="POST" class="form">
+        <form action="cliente" method="POST" class="form">
             <label for="nome">Nome:</label>
             <input class="input" type="text" id="nome" name="nome" required/>
             <label for="endereco">Endereço:</label>
             <input class="input" type="text" id="endereco" name="endereco" required/>
             <label for="telefone">Telefone:</label>
             <input class="input" type="text" id="telefone" name="telefone" required/>
-            <input type="hidden" name="logica" value="AdicionaCliente"/>
             <input type="submit" value="Cadastrar" class="submit"/>
         </form>
     </div>
     <div class="content" id="col2">
-        <jsp:useBean id="dao" class="br.com.autopecas.projetogrupo.dao.ClienteDao"/>
-        <c:forEach var="cliente" items="${dao.buscaTodosClientes()}">
+        <c:forEach var="cliente" items="${clientes}">
+
             <div class="block">
                 <div>
                     <p>ID: ${cliente.id}</p>
