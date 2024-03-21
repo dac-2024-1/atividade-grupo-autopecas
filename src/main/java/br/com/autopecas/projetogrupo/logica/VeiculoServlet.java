@@ -61,9 +61,9 @@ public class VeiculoServlet extends HttpServlet {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-
-        if( req.getParameter("id") != null ) {
-            Long id = Long.parseLong(req.getParameter("id"));
+        String idStr = req.getParameter("id");
+        if( idStr != null && !idStr.trim().isEmpty()) {
+            Long id = Long.parseLong(idStr);
             Veiculo veiculo = null;
             List<Veiculo> veiculos = new ArrayList<>();
             req.setAttribute("veiculos", veiculos);
@@ -76,9 +76,7 @@ public class VeiculoServlet extends HttpServlet {
             assert veiculo != null;
             if (veiculo.getId() != null) {
                 veiculos.add(veiculo);
-                req.setAttribute("veiculos", veiculos);
             }
-
         }
 
         req.getRequestDispatcher("/veiculo.jsp").forward(req, res);
