@@ -2,8 +2,8 @@ package br.com.autopecas.projetogrupo.entidades;
 
 public class Usuario {
     private Long id;
-    private String nomeUsuario;
-    private String senha;
+    private String username;
+    private String password;
 
     public Long getId() {
         return id;
@@ -13,20 +13,20 @@ public class Usuario {
         this.id = id;
     }
 
-    public String getNomeUsuario() {
-        return nomeUsuario;
+    public String getUsername() {
+        return username;
     }
 
-    public void setNomeUsuario(String nomeUsuario) {
-        this.nomeUsuario = nomeUsuario;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getSenha() {
-        return senha;
+    public String getPassword() {
+        return password;
     }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
 }

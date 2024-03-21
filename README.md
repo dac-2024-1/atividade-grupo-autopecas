@@ -5,7 +5,7 @@ Repositório para a atividade colaborativa da disciplina DAC 2024.1. Equipe: Gab
 ![Modelo relacional](modeloConceitual.png)
 
 ## Script para criação das tabelas:
-```sql
+```postgresql
 CREATE TABLE cliente (
 	id serial PRIMARY KEY,
 	nome varchar(100) NOT NULL,
@@ -72,4 +72,11 @@ CREATE TABLE vendaPeca (
 	FOREIGN KEY (idVenda) REFERENCES venda(id),
 	FOREIGN KEY (idPeca) REFERENCES peca(id)
 );
+
+CREATE TABLE usuario (
+    id serial PRIMARY KEY,
+    username VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL
+);
+
 ```
