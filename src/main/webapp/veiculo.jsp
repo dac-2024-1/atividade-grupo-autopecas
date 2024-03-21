@@ -133,14 +133,14 @@
                 </button>
             </form>
             <c:choose>
-                <c:when test="${veiculo != null}">
-                    pizza.
+                <c:when test="${veiculos.isEmpty()}">
                     <br />
+                    <h3>
+                        Nao ha veiculos.
+                    </h3>
+                    <br />
+                    <a href="veiculo">Voltar</a>
                 </c:when>
-                <c:otherwise>
-                    pizzas.
-                    <br />
-                </c:otherwise>
             </c:choose>
 
             <c:forEach var="veiculo" items="${veiculos}">

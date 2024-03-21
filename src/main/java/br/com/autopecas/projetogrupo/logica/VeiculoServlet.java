@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet(name = "Veiculo", value = "/veiculo")
 public class VeiculoServlet extends HttpServlet {
@@ -63,6 +65,8 @@ public class VeiculoServlet extends HttpServlet {
         if( req.getParameter("id") != null ) {
             Long id = Long.parseLong(req.getParameter("id"));
             Veiculo veiculo = null;
+            List<Veiculo> veiculos = new ArrayList<>();
+            req.setAttribute("veiculos", veiculos);
             try {
                 dao = new VeiculoDao();
                 veiculo = dao.buscaVeiculoPorId(id);
@@ -71,8 +75,10 @@ public class VeiculoServlet extends HttpServlet {
             }
             assert veiculo != null;
             if (veiculo.getId() != null) {
-                req.setAttribute("veiculo", veiculo);
+                veiculos.add(veiculo);
+                req.setAttribute("veiculos", veiculos);
             }
+
         }
 
         req.getRequestDispatcher("/veiculo.jsp").forward(req, res);
