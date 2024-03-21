@@ -1,4 +1,4 @@
-package br.com.autopecas.projetogrupo.logica;
+package br.com.autopecas.projetogrupo.servlets;
 
 import br.com.autopecas.projetogrupo.dao.ClienteDao;
 import br.com.autopecas.projetogrupo.entidades.Cliente;
