@@ -4,102 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Veiculos</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            font-family: Verdana;
-        }
-
-        .title {
-            color: teal;
-            margin-bottom: 2rem;
-        }
-
-        .container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            margin: 3rem 8rem;
-            gap: 5rem;
-        }
-
-        .form {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        .input {
-            padding: 0.5rem 0.75rem;
-            border: 1px solid lightgrey;
-            border-radius: 5px;
-            box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-        }
-
-        .submit {
-            background-color: teal;
-            border: none;
-            padding: 0.75rem 2rem;
-            align-self: start;
-            border-radius: 20px;
-            color: white;
-            font-weight: bold;
-            margin-top: 1rem;
-            text-transform: uppercase;
-            cursor: pointer;
-        }
-
-        .block {
-            border: 1px solid teal;
-            padding: 1rem 2rem;
-            border-radius: 30px;
-            margin: 0.75rem 0;
-            display: flex;
-            justify-content: space-between;
-            box-shadow: rgba(0, 0, 0, 0.16) 0 1px 4px;
-        }
-
-        #col2 {
-            max-height: 80vh;
-            overflow: auto;
-            padding-right: 1rem;
-        }
-
-        .delete-button, .search-button {
-            border: 1px solid teal;
-            background-color: transparent;
-            padding: 0.25rem;
-            border-radius: 30px;
-            cursor: pointer;
-        }
-
-        .search-button {
-            background-color: teal;
-        }
-        .delete-button:hover {
-            background-color: teal;
-        }
-
-        .delete-button:hover svg {
-            stroke: white;
-        }
-
-        .search-form {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-            row-gap: 2;
-            padding: 0.5rem 0.75rem;
-            border: 1px solid lightgrey;
-            border-radius: 5px;
-            box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-        }
-
-        .search-input {
-            border: none;
-            width: 100%;
-        }
-    </style>
+    <link rel="stylesheet" href="styleCss.css">
 </head>
 <body>
 <main class="container">
@@ -132,17 +37,6 @@
                     </svg>
                 </button>
             </form>
-            <c:choose>
-                <c:when test="${veiculos.isEmpty()}">
-                    <br />
-                    <h3>
-                        Nao ha veiculos.
-                    </h3>
-                    <br />
-                    <a href="veiculo">Voltar</a>
-                </c:when>
-            </c:choose>
-
             <c:forEach var="veiculo" items="${veiculos}">
                 <div class="block">
                     <div>
@@ -151,12 +45,12 @@
                         <p>Modelo: ${veiculo.modelo}</p>
                         <p>Ano: ${veiculo.ano}</p>
                         <p>Ano: ${veiculo.placa}</p>
-                        <p>Cliente: ${veiculo.cliente.id}</p>
+                        <p>Cliente: ${veiculo.cliente.id} - ${veiculo.cliente.nome}</p>
                     </div>
                     <form action="mvc" method="POST">
                         <input type="hidden" name="id" value="${veiculo.id}">
                         <input type="hidden" name="logica" value="DeletaVeiculo"/>
-                        <button class="delete-button" type="submit">
+                        <button class="icon-button" type="submit">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
                                  fill="none"
                                  stroke="rgb(0, 128, 128)" stroke-width="1" stroke-linecap="round"
