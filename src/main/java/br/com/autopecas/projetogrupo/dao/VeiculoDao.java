@@ -27,7 +27,7 @@ public class VeiculoDao {
             stmt.setString(2, veiculo.getModelo());
             stmt.setString(3, veiculo.getAno());
             stmt.setString(4, veiculo.getPlaca());
-            stmt.setLong(3, veiculo.getCliente().getId());
+            stmt.setLong(5, veiculo.getCliente().getId());
             stmt.execute();
             stmt.close();
         } catch (SQLException e) {

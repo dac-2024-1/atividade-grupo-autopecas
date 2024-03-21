@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <head>
     <meta charset="UTF-8">
-    <title>Adiciona cliente</title>
+    <title>Clientes</title>
     <style>
         * {
             margin: 0;

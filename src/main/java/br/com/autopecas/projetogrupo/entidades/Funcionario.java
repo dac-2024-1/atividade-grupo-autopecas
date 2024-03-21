@@ -11,6 +11,10 @@ public class Funcionario {
     private Float salario;
     private LocalDate dataDeContratacao;
 
+
+    private Usuario usuario;
+
+
     public Long getId() {
         return id;
     }
@@ -65,5 +69,12 @@ public class Funcionario {
 
     public void setDataDeContratacao(LocalDate dataDeContratacao) {
         this.dataDeContratacao = dataDeContratacao;
+    }
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }
