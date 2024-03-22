@@ -14,17 +14,19 @@
 </head>
 <body>
     <h1>Login</h1>
+    <a href="${pageContext.request.contextPath}/usuario/registro">Registre-se</a>
     <c:if test="${mensagem != null and !mensagem.trim().isEmpty()}">
         <p>
             ${mensagem}
         </p>
     </c:if>
-    <form action="login" method="post">
+    <form action="${pageContext.request.contextPath}/usuario/login" method="post">
         <input type="hidden" name="logica" value="LoginUsuario" />
         <label for="username">Nome de usuário:</label><br>
         <input type="text" id="username" name="username"><br>
         <label for="password">Senha:</label><br>
         <input type="password" id="password" name="password"><br>
+        <br>
         <input type="submit" value="Login">
     </form>
 </body>

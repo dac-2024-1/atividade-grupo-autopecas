@@ -4,6 +4,7 @@ public class Usuario {
     private Long id;
     private String username;
     private String password;
+    private Funcionario funcionario;
 
     public Long getId() {
         return id;
@@ -29,4 +30,11 @@ public class Usuario {
         this.password = password;
     }
 
+    public Funcionario getFuncionario() {
+        return funcionario;
+    }
+
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
+    }
 }

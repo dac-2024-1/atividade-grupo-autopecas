@@ -10,13 +10,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "RegistraUsuario", value = "/registraUsuario")
-public class RegistraUsuario extends HttpServlet {
+@WebServlet(name = "RegistraUsuario", value = "/usuario/registro")
+public class Registro extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
         String confirmaSenha = req.getParameter("confirmaSenha");
+        String idFuncionario = req.getParameter("idFuncionario");
 
         String mensagem = "Registro feito com sucesso! Faça login para continuar.";
 
@@ -45,12 +46,12 @@ public class RegistraUsuario extends HttpServlet {
             e.printStackTrace();
         }
         req.setAttribute("mensagem", mensagem);
-        getServletContext().getRequestDispatcher("/usuarios/login.jsp").forward(req, res);
+        getServletContext().getRequestDispatcher("/usuario/login.jsp").forward(req, res);
 
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        getServletContext().getRequestDispatcher("/usuarios/registro.jsp").forward(req, res);
+        getServletContext().getRequestDispatcher("/usuario/registro.jsp").forward(req, res);
     }
 }

@@ -14,12 +14,13 @@
 </head>
 <body>
     <h1>Registro de Usuário</h1>
+    <a href="${pageContext.request.contextPath}/usuario/login">Login</a>
     <c:if test="${mensagem != null and !mensagem.trim().isEmpty()}">
         <p style="color: red;">
             Falha ao registrar usuário. ${mensagem}
         </p>
     </c:if>
-    <form action="registraUsuario" method="POST">
+    <form action="${pageContext.request.contextPath}/usuario/registro" method="POST">
         <label for="username">Nome de usuário:</label><br>
         <input type="text" id="username" name="username"><br>
         <label for="password">Senha:</label><br>

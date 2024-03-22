@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "Login", value = "/login")
+@WebServlet(name = "Login", value = "/usuario/login")
 public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -23,22 +23,21 @@ public class Login extends HttpServlet {
 
         try {
             UsuarioDao userDao = new UsuarioDao();
-            System.out.println(username + " " + password);
             if (userDao.checkPassword(user)) {
                 req.getSession().setAttribute("username", username);
-                res.sendRedirect("cliente");
+                res.sendRedirect("/index.html");
+                return;
             }
-            else {
-                req.setAttribute("mensagem", "Usuário ou senha inválidos.");
-                getServletContext().getRequestDispatcher("/usuarios/login.jsp").forward(req, res);
-            }
+
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
+        req.setAttribute("mensagem", "Usuário ou senha inválidos. Preencha os campos corretamente.");
+        getServletContext().getRequestDispatcher("/usuario/login.jsp").forward(req, res);
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        getServletContext().getRequestDispatcher("/usuarios/login.jsp").forward(req, res);
+        getServletContext().getRequestDispatcher("/usuario/login.jsp").forward(req, res);
     }
 }

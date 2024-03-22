@@ -76,7 +76,10 @@ CREATE TABLE vendaPeca (
 CREATE TABLE usuario (
     id serial PRIMARY KEY,
     username VARCHAR(255) NOT NULL UNIQUE,
-    password VARCHAR(255) NOT NULL
+    password VARCHAR(255) NOT NULL,
+    
+    idfuncionario int,
+    FOREIGN KEY (idfuncionario) REFERENCES funcionario(id)
 );
 
 ```
