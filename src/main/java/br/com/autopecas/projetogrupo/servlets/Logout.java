@@ -14,6 +14,12 @@ public class Logout extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         req.getSession().invalidate();
 
-        res.sendRedirect(req.getContextPath() + "/usuario/login");
+        try {
+            res.sendRedirect(req.getContextPath() + "/usuario/login");
+        } catch (RuntimeException | IOException e) {
+            e.printStackTrace();
+            req.setAttribute("error", e.getMessage());
+            req.getRequestDispatcher("/erro.jsp").forward(req, res);
+        }
     }
 }

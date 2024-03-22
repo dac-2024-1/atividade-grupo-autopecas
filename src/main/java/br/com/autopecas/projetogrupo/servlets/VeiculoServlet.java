@@ -70,8 +70,10 @@ public class VeiculoServlet extends HttpServlet {
             try {
                 dao = new VeiculoDao();
                 veiculo = dao.buscaVeiculoPorId(id);
-            } catch (ClassNotFoundException e) {
+            } catch (ClassNotFoundException | RuntimeException e) {
                 e.printStackTrace();
+                req.setAttribute("error", e.getMessage());
+                req.getRequestDispatcher("/erro.jsp").forward(req, res);
             }
             assert veiculo != null;
             if (veiculo.getId() != null) {

@@ -29,8 +29,10 @@ public class Login extends HttpServlet {
                 return;
             }
 
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+        } catch (RuntimeException | ClassNotFoundException e) {
+            e.printStackTrace();
+            req.setAttribute("error", e.getMessage());
+            req.getRequestDispatcher("/erro.jsp").forward(req, res);
         }
         req.setAttribute("mensagem", "Usuário ou senha inválidos. Preencha os campos corretamente.");
         getServletContext().getRequestDispatcher("/usuario/login.jsp").forward(req, res);

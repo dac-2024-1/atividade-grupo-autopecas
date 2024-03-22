@@ -14,16 +14,15 @@ public class AuthenticationFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) res;
 
-        // Check if the user is authenticated
+        // Comentar esse if pra desativar autenticaçao enquanto desenvolve
         if (request.getSession().getAttribute("username") == null
                 && !request.getRequestURI().endsWith("/usuario/login")
                 && !request.getRequestURI().endsWith("/usuario/registro")) {
-            // If not, redirect to the login page
             request.setAttribute("mensagem", "Você precisa estar logado para acessar essa página.");
             request.getRequestDispatcher("/usuario/login.jsp").forward(request, response);
-        } else {
-            chain.doFilter(req, res);
+            return;
         }
+        chain.doFilter(req, res);
     }
 
     @Override

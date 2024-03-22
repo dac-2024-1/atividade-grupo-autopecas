@@ -1,11 +1,8 @@
 package br.com.autopecas.projetogrupo.servlets;
 
 import br.com.autopecas.projetogrupo.dao.ClienteDao;
-import br.com.autopecas.projetogrupo.dao.VeiculoDao;
 import br.com.autopecas.projetogrupo.entidades.Cliente;
-import br.com.autopecas.projetogrupo.entidades.Veiculo;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -59,8 +56,10 @@ public class ClienteServlet extends HttpServlet {
             try {
                 dao = new ClienteDao();
                 cliente = dao.buscaClientePorId(id);
-            } catch (ClassNotFoundException e) {
+            } catch (ClassNotFoundException | RuntimeException e) {
                 e.printStackTrace();
+                req.setAttribute("error", e.getMessage());
+                req.getRequestDispatcher("/erro.jsp").forward(req, res);
             }
             assert cliente != null;
             if (cliente.getId() != null) {

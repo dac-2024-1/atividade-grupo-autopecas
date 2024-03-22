@@ -42,12 +42,13 @@ public class Registro extends HttpServlet {
         try {
             dao = new UsuarioDao();
             dao.registra(usuario);
-        } catch (ClassNotFoundException e) {
+        } catch (ClassNotFoundException | RuntimeException e) {
             e.printStackTrace();
+            req.setAttribute("error", e.getMessage());
+            req.getRequestDispatcher("/erro.jsp").forward(req, res);
         }
         req.setAttribute("mensagem", mensagem);
         getServletContext().getRequestDispatcher("/usuario/login.jsp").forward(req, res);
-
     }
 
     @Override

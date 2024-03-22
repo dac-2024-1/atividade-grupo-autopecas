@@ -2,7 +2,6 @@ package br.com.autopecas.projetogrupo.logica;
 
 import br.com.autopecas.projetogrupo.dao.VeiculoDao;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,8 +13,9 @@ public class DeletaVeiculo implements Logica{
         try {
             dao = new VeiculoDao();
             dao.deletaVeiculo(id);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+        } catch (ClassNotFoundException | RuntimeException e) {
+            req.setAttribute("error", e.getMessage());
+            req.getRequestDispatcher("/erro.jsp").forward(req, res);
         }
 
         res.sendRedirect("veiculo");

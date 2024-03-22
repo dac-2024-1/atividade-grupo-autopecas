@@ -13,6 +13,12 @@ CREATE TABLE cliente (
 	telefone varchar(15) NOT NULL
 );
 
+CREATE TABLE usuario (
+    id serial PRIMARY KEY,
+    username VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL
+);
+
 CREATE TABLE funcionario (
 	id serial PRIMARY KEY,
 	nome varchar(150) NOT NULL,
@@ -20,7 +26,10 @@ CREATE TABLE funcionario (
 	endereco varchar(150) NOT NULL,
 	telefone varchar(15) NOT NULL,
 	salario float NOT NULL,
-	dataDeContratacao date NOT NULL
+	dataDeContratacao date NOT NULL,
+
+	idusuario int,
+    FOREIGN KEY (idusuario) REFERENCES usuario(id)
 );
 
 CREATE TABLE peca (
@@ -36,7 +45,8 @@ CREATE TABLE veiculo (
 	marca varchar(30) NOT NULL,
 	modelo varchar(30) NOT NULL,
 	ano varchar(4) NOT NULL,
-
+    placa varchar(8) NOT NULL,
+    
 	idCliente int,
 	FOREIGN KEY (idCliente) REFERENCES Cliente(id)
 );
@@ -71,15 +81,6 @@ CREATE TABLE vendaPeca (
 	idPeca int,
 	FOREIGN KEY (idVenda) REFERENCES venda(id),
 	FOREIGN KEY (idPeca) REFERENCES peca(id)
-);
-
-CREATE TABLE usuario (
-    id serial PRIMARY KEY,
-    username VARCHAR(255) NOT NULL UNIQUE,
-    password VARCHAR(255) NOT NULL,
-    
-    idfuncionario int,
-    FOREIGN KEY (idfuncionario) REFERENCES funcionario(id)
 );
 
 ```
