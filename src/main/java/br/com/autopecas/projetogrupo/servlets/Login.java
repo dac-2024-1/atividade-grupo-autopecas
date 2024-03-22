@@ -12,6 +12,7 @@ import java.io.IOException;
 
 @WebServlet(name = "Login", value = "/usuario/login")
 public class Login extends HttpServlet {
+    String loginPath = "/usuario/login.jsp";
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         String username = req.getParameter("username");
@@ -25,7 +26,7 @@ public class Login extends HttpServlet {
             UsuarioDao userDao = new UsuarioDao();
             if (userDao.checkPassword(user)) {
                 req.getSession().setAttribute("username", username);
-                res.sendRedirect("/index.html");
+                res.sendRedirect("/");
                 return;
             }
 
@@ -35,11 +36,15 @@ public class Login extends HttpServlet {
             req.getRequestDispatcher("/erro.jsp").forward(req, res);
         }
         req.setAttribute("mensagem", "Usuário ou senha inválidos. Preencha os campos corretamente.");
-        getServletContext().getRequestDispatcher("/usuario/login.jsp").forward(req, res);
+        getServletContext().getRequestDispatcher(loginPath).forward(req, res);
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        getServletContext().getRequestDispatcher("/usuario/login.jsp").forward(req, res);
+        if (req.getSession().getAttribute("username") != null) {
+            res.sendRedirect(req.getContextPath() + "/");
+        } else {
+        getServletContext().getRequestDispatcher(loginPath).forward(req, res);
+        }
     }
 }

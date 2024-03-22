@@ -12,6 +12,8 @@ import java.io.IOException;
 
 @WebServlet(name = "RegistraUsuario", value = "/usuario/registro")
 public class Registro extends HttpServlet {
+    String registroPath = "/usuario/registro.jsp";
+    String loginPath = "/usuario/login.jsp";
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         String username = req.getParameter("username");
@@ -24,14 +26,14 @@ public class Registro extends HttpServlet {
         if(!password.equals(confirmaSenha)){
             mensagem = "Senhas não conferem.";
             req.setAttribute("mensagem", mensagem);
-            getServletContext().getRequestDispatcher("/usuarios/registro.jsp").forward(req, res);
+            getServletContext().getRequestDispatcher(registroPath).forward(req, res);
             return;
         }
 
         if(username.isEmpty() || password.isEmpty()){
             mensagem = "Preencha todos os campos.";
             req.setAttribute("mensagem", mensagem);
-            getServletContext().getRequestDispatcher("/usuarios/registro.jsp").forward(req, res);
+            getServletContext().getRequestDispatcher(registroPath).forward(req, res);
             return;
         }
 
@@ -48,11 +50,15 @@ public class Registro extends HttpServlet {
             req.getRequestDispatcher("/erro.jsp").forward(req, res);
         }
         req.setAttribute("mensagem", mensagem);
-        getServletContext().getRequestDispatcher("/usuario/login.jsp").forward(req, res);
+        getServletContext().getRequestDispatcher(loginPath).forward(req, res);
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        getServletContext().getRequestDispatcher("/usuario/registro.jsp").forward(req, res);
+        if (req.getSession().getAttribute("username") != null) {
+            res.sendRedirect(req.getContextPath() + "/");
+        } else {
+            getServletContext().getRequestDispatcher(registroPath).forward(req, res);
+        }
     }
 }
