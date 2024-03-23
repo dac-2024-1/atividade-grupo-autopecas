@@ -15,6 +15,7 @@
 <body>
     <h1>Login</h1>
     <a href="${pageContext.request.contextPath}/usuario/registro">Registre-se</a>
+    <%--@elvariable id="mensagem" type="java.lang.String"--%>
     <c:if test="${mensagem != null and !mensagem.trim().isEmpty()}">
         <p>
             ${mensagem}
