@@ -83,5 +83,20 @@ public class PecaDao {
 
     }
 
+    public void atualizaPeca(Peca peca) {
+        String sql = "update peca set preco=?, quantidadeEstoque=? where id=?";
+
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setFloat(1, peca.getPreco());
+            stmt.setInt(2, peca.getQuantidadeEstoque());
+            stmt.setLong(3, peca.getId());
+            stmt.execute();
+            stmt.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
 }

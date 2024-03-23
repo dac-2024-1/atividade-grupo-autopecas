@@ -54,11 +54,33 @@
                             <p>Preço: ${peca.preco}</p>
                             <p>Quantidade em estoque: ${peca.quantidadeEstoque}</p>
                         </div>
+                        <div class="button-group">
+                            <button class="icon-button update-button">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                     fill="none" stroke="rgb(0, 128, 128)" stroke-width="1" stroke-linecap="round"
+                                     stroke-linejoin="round" class="lucide lucide-square-pen">
+                                    <path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                                    <path d="M18.375 2.625a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4Z"/>
+                                </svg>
+                            </button>
+                        </div>
                     </div>
+                    <form action="mvc" method="POST" class="update-div hide">
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <label for="preco-update">Preço:</label>
+                            <input class="input" type="text" id="preco-update" name="preco" required/>
+                            <label for="quantidade-update">Quantidade em estoque:</label>
+                            <input class="input" type="text" id="quantidade-update" name="quantidadeEstoque" required/>
+                        </div>
+                        <input type="hidden" name="id" value="${peca.id}">
+                        <input type="hidden" name="logica" value="AtualizaPeca"/>
+                        <input type="submit" value="Atualizar" class="submit update"/>
+                    </form>
                 </div>
             </c:forEach>
         </div>
     </div>
 </main>
+<script src="script.js"></script>
 </body>
 </html>
