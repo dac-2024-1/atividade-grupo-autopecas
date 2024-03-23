@@ -85,4 +85,20 @@ public class UsuarioDao {
             throw new RuntimeException(e);
         }
     }
+
+    public Long buscaIdPorUsername(String username){
+        String sql = "select id from usuario where username=?";
+        try {
+            PreparedStatement stmt = this.connection.prepareStatement(sql);
+            stmt.setString(1, username);
+            ResultSet rs = stmt.executeQuery();
+            Long id = null;
+            while (rs.next()) {
+                id = rs.getLong("id");
+            }
+            return id;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

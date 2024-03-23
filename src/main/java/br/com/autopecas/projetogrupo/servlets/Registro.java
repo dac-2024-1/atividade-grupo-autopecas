@@ -1,5 +1,6 @@
 package br.com.autopecas.projetogrupo.servlets;
 
+import br.com.autopecas.projetogrupo.dao.FuncionarioDao;
 import br.com.autopecas.projetogrupo.dao.UsuarioDao;
 import br.com.autopecas.projetogrupo.entidades.Usuario;
 
@@ -40,21 +41,37 @@ public class Registro extends HttpServlet {
         Usuario usuario = new Usuario();
         usuario.setUsername(username);
         usuario.setPassword(password);
-        UsuarioDao dao;
+        UsuarioDao userDao;
+
         try {
-            dao = new UsuarioDao();
-            dao.registra(usuario);
+            userDao = new UsuarioDao();
+            FuncionarioDao funcionarioDao = new FuncionarioDao();
+            userDao.registra(usuario);
+
+            if(idFuncionario != null && !idFuncionario.isEmpty()){
+                long longFunId = Long.parseLong(idFuncionario);
+                funcionarioDao.associaUsuario(longFunId, userDao.buscaIdPorUsername(username));
+            }
+
         } catch (ClassNotFoundException | RuntimeException e) {
             e.printStackTrace();
             req.setAttribute("error", e.getMessage());
             req.getRequestDispatcher("/erro.jsp").forward(req, res);
         }
+
         req.setAttribute("mensagem", mensagem);
         getServletContext().getRequestDispatcher(loginPath).forward(req, res);
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+        try {
+            req.setAttribute("funcionarios", new FuncionarioDao().buscaTodosSemUsuario());
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            req.setAttribute("error", e.getMessage());
+            req.getRequestDispatcher("/erro.jsp").forward(req, res);
+        }
         if (req.getSession().getAttribute("username") != null) {
             res.sendRedirect(req.getContextPath() + "/");
         } else {

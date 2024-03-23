@@ -41,7 +41,7 @@ public class FuncionarioDao {
             stmt.setString(3, funcionario.getTelefone());
             stmt.setString(4, funcionario.getCargo());
             stmt.setFloat(5, funcionario.getSalario());
-            stmt.setDate(6, Date.valueOf(funcionario.getDataDeContratacao()));
+            stmt.setDate(6, Date.valueOf(funcionario.getDataContratacao()));
             stmt.execute();
             stmt.close();
         } catch (SQLException e) {
@@ -50,8 +50,8 @@ public class FuncionarioDao {
     }
 
     public void associaUsuario(Long funId, Long userId) {
-        String sql = "update funcionario set idusuario = ? where id = ?";
         try {
+            String sql = "update funcionario set idusuario = ? where id = ?";
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setLong(1, userId);
             stmt.setLong(2, funId);
@@ -82,20 +82,23 @@ public class FuncionarioDao {
         List<Funcionario> funs = new ArrayList<>();
         try {
             PreparedStatement stmt = this.connection.prepareStatement("select * from funcionario");
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-                Funcionario funcionario = new Funcionario();
-                buildFuncionario(rs, funcionario);
-                funs.add(funcionario);
-            }
-            rs.close();
-            stmt.close();
-            return funs;
+            return getFuncionarios(funs, stmt);
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
-    public void deletaFuncionario(Long id){
+
+    public List<Funcionario> buscaTodosSemUsuario() {
+        List<Funcionario> funs = new ArrayList<>();
+        try {
+            PreparedStatement stmt = this.connection.prepareStatement("select * from funcionario where idusuario is null");
+            return getFuncionarios(funs, stmt);
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void deletaFuncionario(Long id) {
         try {
             Funcionario funcionario = buscaPorId(id);
             PreparedStatement stmt = connection.prepareStatement("delete from funcionario where id=?");
@@ -103,7 +106,29 @@ public class FuncionarioDao {
             stmt.execute();
             stmt.close();
 
-            userDao.deletaUsuario(funcionario.getUsuario().getId());
+            Long userId = funcionario.getUsuario().getId();
+            if (userId != null) {
+                userDao.deletaUsuario(userId);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void atualiza(Funcionario funcionario) {
+        String sql = "update funcionario set nome=?, endereco=?, telefone=?, cargo=?, salario=?, dataDeContratacao=? where id=?";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setString(1, funcionario.getNome());
+            stmt.setString(2, funcionario.getEndereco());
+            stmt.setString(3, funcionario.getTelefone());
+            stmt.setString(4, funcionario.getCargo());
+            stmt.setFloat(5, funcionario.getSalario());
+            stmt.setDate(6, Date.valueOf(funcionario.getDataContratacao()));
+            stmt.setLong(7, funcionario.getId());
+            stmt.execute();
+            stmt.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -116,10 +141,21 @@ public class FuncionarioDao {
         funcionario.setTelefone(rs.getString("telefone"));
         funcionario.setCargo(rs.getString("cargo"));
         funcionario.setSalario(rs.getFloat("salario"));
-        funcionario.setDataDeContratacao(rs.getDate("dataDeContratacao").toLocalDate());
+        funcionario.setDataContratacao(rs.getDate("dataDeContratacao").toLocalDate());
         Usuario user = userDao.buscaPorId(rs.getLong("idusuario"));
         funcionario.setUsuario(user);
     }
 
+    private List<Funcionario> getFuncionarios(List<Funcionario> funs, PreparedStatement stmt) throws SQLException, ClassNotFoundException {
+        ResultSet rs = stmt.executeQuery();
+        while (rs.next()) {
+            Funcionario funcionario = new Funcionario();
+            buildFuncionario(rs, funcionario);
+            funs.add(funcionario);
+        }
+        rs.close();
+        stmt.close();
+        return funs;
+    }
 
 }
