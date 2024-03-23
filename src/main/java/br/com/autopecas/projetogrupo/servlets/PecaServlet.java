@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @WebServlet(name = "Peca", value = "/peca")
@@ -41,7 +43,34 @@ public class PecaServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        getServletContext().getRequestDispatcher("/peca.jsp").forward(req, res);
+        PecaDao dao;
+        try {
+            dao = new PecaDao();
+            req.setAttribute("pecas", dao.BuscaTodasPecas());
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        String idStr = req.getParameter("id");
+        if( idStr != null && !idStr.trim().isEmpty()) {
+            Long id = Long.parseLong(idStr);
+            Peca peca = null;
+            List<Peca> pecas = new ArrayList<>();
+            req.setAttribute("pecas", pecas);
+            try {
+                dao = new PecaDao();
+                peca = dao.buscaPecaPorId(id);
+            } catch (ClassNotFoundException | RuntimeException e) {
+                e.printStackTrace();
+                req.setAttribute("error", e.getMessage());
+                req.getRequestDispatcher("/erro.jsp").forward(req, res);
+            }
+            assert peca != null;
+            if (peca.getId() != null) {
+                pecas.add(peca);
+            }
+        }
+        req.getRequestDispatcher("/peca.jsp").forward(req, res);
     }
 
 }
