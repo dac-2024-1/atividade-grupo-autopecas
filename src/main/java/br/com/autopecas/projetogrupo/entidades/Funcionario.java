@@ -9,7 +9,7 @@ public class Funcionario {
     private String endereco;
     private String telefone;
     private Float salario;
-    private LocalDate dataDeContratacao;
+    private LocalDate dataContratacao;
 
 
     private Usuario usuario;
@@ -63,12 +63,12 @@ public class Funcionario {
         this.salario = salario;
     }
 
-    public LocalDate getDataDeContratacao() {
-        return dataDeContratacao;
+    public LocalDate getDataContratacao() {
+        return dataContratacao;
     }
 
-    public void setDataDeContratacao(LocalDate dataDeContratacao) {
-        this.dataDeContratacao = dataDeContratacao;
+    public void setDataContratacao(LocalDate dataContratacao) {
+        this.dataContratacao = dataContratacao;
     }
     public Usuario getUsuario() {
         return usuario;

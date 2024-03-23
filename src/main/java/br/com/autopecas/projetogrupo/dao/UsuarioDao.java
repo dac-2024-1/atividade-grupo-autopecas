@@ -58,4 +58,47 @@ public class UsuarioDao {
         }
     }
 
+    public Usuario buscaPorId(Long id) {
+        String sql = "select * from usuario where id=?";
+        try {
+            PreparedStatement stmt = this.connection.prepareStatement(sql);
+            stmt.setLong(1, id);
+            ResultSet rs = stmt.executeQuery();
+            Usuario usuario = new Usuario();
+            while (rs.next()) {
+                usuario.setId(rs.getLong("id"));
+                usuario.setUsername(rs.getString("username"));
+                usuario.setPassword(rs.getString("password"));
+            }
+            return usuario;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void deletaUsuario(Long id){
+        try {
+            PreparedStatement stmt = connection.prepareStatement("delete from usuario where id=?");
+            stmt.setLong(1, id);
+            stmt.execute();
+            stmt.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public Long buscaIdPorUsername(String username){
+        String sql = "select id from usuario where username=?";
+        try {
+            PreparedStatement stmt = this.connection.prepareStatement(sql);
+            stmt.setString(1, username);
+            ResultSet rs = stmt.executeQuery();
+            Long id = null;
+            while (rs.next()) {
+                id = rs.getLong("id");
+            }
+            return id;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

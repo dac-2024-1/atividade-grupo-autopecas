@@ -1,5 +1,6 @@
 package br.com.autopecas.projetogrupo.servlets;
 
+import br.com.autopecas.projetogrupo.dao.FuncionarioDao;
 import br.com.autopecas.projetogrupo.dao.UsuarioDao;
 import br.com.autopecas.projetogrupo.entidades.Usuario;
 
@@ -12,6 +13,8 @@ import java.io.IOException;
 
 @WebServlet(name = "RegistraUsuario", value = "/usuario/registro")
 public class Registro extends HttpServlet {
+    String registroPath = "/usuario/registro.jsp";
+    String loginPath = "/usuario/login.jsp";
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         String username = req.getParameter("username");
@@ -24,35 +27,55 @@ public class Registro extends HttpServlet {
         if(!password.equals(confirmaSenha)){
             mensagem = "Senhas não conferem.";
             req.setAttribute("mensagem", mensagem);
-            getServletContext().getRequestDispatcher("/usuarios/registro.jsp").forward(req, res);
+            getServletContext().getRequestDispatcher(registroPath).forward(req, res);
             return;
         }
 
         if(username.isEmpty() || password.isEmpty()){
             mensagem = "Preencha todos os campos.";
             req.setAttribute("mensagem", mensagem);
-            getServletContext().getRequestDispatcher("/usuarios/registro.jsp").forward(req, res);
+            getServletContext().getRequestDispatcher(registroPath).forward(req, res);
             return;
         }
 
         Usuario usuario = new Usuario();
         usuario.setUsername(username);
         usuario.setPassword(password);
-        UsuarioDao dao;
+        UsuarioDao userDao;
+
         try {
-            dao = new UsuarioDao();
-            dao.registra(usuario);
+            userDao = new UsuarioDao();
+            FuncionarioDao funcionarioDao = new FuncionarioDao();
+            userDao.registra(usuario);
+
+            if(idFuncionario != null && !idFuncionario.isEmpty()){
+                long longFunId = Long.parseLong(idFuncionario);
+                funcionarioDao.associaUsuario(longFunId, userDao.buscaIdPorUsername(username));
+            }
+
         } catch (ClassNotFoundException | RuntimeException e) {
             e.printStackTrace();
             req.setAttribute("error", e.getMessage());
             req.getRequestDispatcher("/erro.jsp").forward(req, res);
         }
+
         req.setAttribute("mensagem", mensagem);
-        getServletContext().getRequestDispatcher("/usuario/login.jsp").forward(req, res);
+        getServletContext().getRequestDispatcher(loginPath).forward(req, res);
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        getServletContext().getRequestDispatcher("/usuario/registro.jsp").forward(req, res);
+        try {
+            req.setAttribute("funcionarios", new FuncionarioDao().buscaTodosSemUsuario());
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            req.setAttribute("error", e.getMessage());
+            req.getRequestDispatcher("/erro.jsp").forward(req, res);
+        }
+        if (req.getSession().getAttribute("username") != null) {
+            res.sendRedirect(req.getContextPath() + "/");
+        } else {
+            getServletContext().getRequestDispatcher(registroPath).forward(req, res);
+        }
     }
 }
