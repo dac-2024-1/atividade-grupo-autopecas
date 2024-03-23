@@ -98,5 +98,17 @@ public class PecaDao {
         }
     }
 
+    public void deletaPeca(Long id){
+        try {
+            PreparedStatement stmt = connection.prepareStatement("delete from peca" +
+                    " where id=?");
+            stmt.setLong(1, id);
+            stmt.execute();
+            stmt.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
 }
