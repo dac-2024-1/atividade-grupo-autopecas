@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <title>Serviços</title>
     <link rel="stylesheet" href="styleCss.css">
+    <link rel="stylesheet" href="servico.css">
 </head>
 <body>
 <main class="container">
@@ -87,43 +88,44 @@
                             </button>
                         </div>
                     </div>
+
+                    <form action="mvc" method="POST" class="update-div hide">
+                        <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap">
+                            <label for="descricao-${servico.id}">Descrição:
+                            <input class="input" type="text" id="descricao-${servico.id}" name="descricao" value="${servico.descricao}" required/>
+                            </label>
+                            <label for="preco-${servico.id}">Preço:
+                            <input class="input" type="text" id="preco-${servico.id}" name="preco"  value="${servico.preco}" required/>
+                            </label>
+                            <label class="label-style" for="data-${servico.id}">Data:
+                            <input class="input" type="date" id="data-${servico.id}" name="data" value="${servico.data}" required/><br/><br/>
+                            </label>
+                            <label class="label-style" for="idVeiculo-${servico.id}">Veículo:
+                            <select class="campo-select input" id="idVeiculo-${servico.id}" name="idVeiculo" required>
+                                <option value="${servico.veiculo.id}" selected>${servico.veiculo.id} - ${servico.veiculo.marca} ${servico.veiculo.modelo} - Proprietário: ${servico.veiculo.cliente.nome}</option>
+                                <c:forEach var="veiculo" items="${veiculos}">
+                                    <c:if test="${veiculo.id != servico.veiculo.id}">
+                                    <option value="${veiculo.id}">${veiculo.id} - ${veiculo.marca} ${veiculo.modelo} - Proprietário: ${veiculo.cliente.nome}</option>
+                                    </c:if>
+                                </c:forEach>
+                            </select>
+                            </label>
+                            <label for="idFuncionario-${servico.id}">Funcionário:
+                            <select class=" campo-select input" id="idFuncionario-${servico.id}" name="idFuncionario" required>
+                                <option value="${servico.funcionario.id}" selected>${servico.funcionario.id} - ${servico.funcionario.nome}</option>
+                                <c:forEach var="funcionario" items="${funcionarios}">
+                                    <c:if test="${funcionario.id != servico.funcionario.id}">
+                                    <option value="${funcionario.id}">${funcionario.id} - ${funcionario.nome}</option>
+                                    </c:if>
+                                </c:forEach>
+                            </select>
+                            </label>
+                        </div>
+                        <input type="hidden" name="id" value="${servico.id}">
+                        <input type="hidden" name="logica" value="AtualizaServico"/>
+                        <input type="submit" value="Atualizar" class="submit update"/>
+                    </form>
                 </div>
-                <form action="mvc" method="POST" class="update-div hide">
-                    <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap">
-                        <label for="descricao-${servico.id}">Descrição:
-                        <input class="input" type="text" id="descricao-${servico.id}" name="descricao" value="${servico.descricao}" required/>
-                        </label>
-                        <label for="preco-${servico.id}">Preço:
-                        <input class="input" type="text" id="preco-${servico.id}" name="preco"  value="${servico.preco}" required/>
-                        </label>
-                        <label for="data-${servico.id}">Data:
-                        <input class="input" type="date" id="data-${servico.id}" name="data" value="${servico.data}" required/><br/><br/>
-                        </label>
-                        <label for="idVeiculo-${servico.id}">Veículo:
-                        <select class="campo-select input" id="idVeiculo-${servico.id}" name="idVeiculo" required>
-                            <option value="${servico.veiculo.id}" selected>${servico.veiculo.id} - ${servico.veiculo.marca} ${servico.veiculo.modelo} - Proprietário: ${servico.veiculo.cliente.nome}</option>
-                            <c:forEach var="veiculo" items="${veiculos}">
-                                <c:if test="${veiculo.id != servico.veiculo.id}">
-                                <option value="${veiculo.id}">${veiculo.id} - ${veiculo.marca} ${veiculo.modelo} - Proprietário: ${veiculo.cliente.nome}</option>
-                                </c:if>
-                            </c:forEach>
-                        </select>
-                        </label>
-                        <label for="idFuncionario-${servico.id}">Funcionário:
-                        <select class=" campo-select input" id="idFuncionario-${servico.id}" name="idFuncionario" required>
-                            <option value="${servico.funcionario.id}" selected>${servico.funcionario.id} - ${servico.funcionario.nome}</option>
-                            <c:forEach var="funcionario" items="${funcionarios}">
-                                <c:if test="${funcionario.id != servico.funcionario.id}">
-                                <option value="${funcionario.id}">${funcionario.id} - ${funcionario.nome}</option>
-                                </c:if>
-                            </c:forEach>
-                        </select>
-                        </label>
-                    </div>
-                    <input type="hidden" name="id" value="${servico.id}">
-                    <input type="hidden" name="logica" value="AtualizaServico"/>
-                    <input type="submit" value="Atualizar" class="submit update"/>
-                </form>
             </c:forEach>
         </div>
     </div>
