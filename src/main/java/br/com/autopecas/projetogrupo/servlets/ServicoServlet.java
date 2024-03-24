@@ -64,31 +64,32 @@ public class ServicoServlet extends HttpServlet {
             dao = new ServicoDao();
             veiculoDao = new VeiculoDao();
             funcionarioDao = new FuncionarioDao();
+            req.setAttribute("servicos", dao.buscaTodosServicos());
             req.setAttribute("veiculos", veiculoDao.buscaTodosVeiculos());
             req.setAttribute("funcionarios", funcionarioDao.buscaTodosSemUsuario());
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
 
-//        String idStr = req.getParameter("id");
-//        if( idStr != null && !idStr.trim().isEmpty()) {
-//            Long id = Long.parseLong(idStr);
-//            Peca peca = null;
-//            List<Peca> pecas = new ArrayList<>();
-//            req.setAttribute("pecas", pecas);
-//            try {
-//                dao = new PecaDao();
-//                peca = dao.buscaPecaPorId(id);
-//            } catch (ClassNotFoundException | RuntimeException e) {
-//                e.printStackTrace();
-//                req.setAttribute("error", e.getMessage());
-//                req.getRequestDispatcher("/erro.jsp").forward(req, res);
-//            }
-//            assert peca != null;
-//            if (peca.getId() != null) {
-//                pecas.add(peca);
-//            }
-//        }
+        String idStr = req.getParameter("id");
+        if( idStr != null && !idStr.trim().isEmpty()) {
+            Long id = Long.parseLong(idStr);
+            Servico servico = null;
+            List<Servico> servicos = new ArrayList<>();
+            req.setAttribute("servicos", servicos);
+            try {
+                dao = new ServicoDao();
+                servico = dao.buscaServicoPorId(id);
+            } catch (ClassNotFoundException | RuntimeException e) {
+                e.printStackTrace();
+                req.setAttribute("error", e.getMessage());
+                req.getRequestDispatcher("/erro.jsp").forward(req, res);
+            }
+            assert servico != null;
+            if (servico.getId() != null) {
+                servicos.add(servico);
+            }
+        }
         req.getRequestDispatcher("/servico.jsp").forward(req, res);
     }
 }
