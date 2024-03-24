@@ -52,9 +52,9 @@ public class UsuarioServlet extends HttpServlet {
         usuario.setPassword(senhaAtual);
         try {
             UsuarioDao usuarioDao = new UsuarioDao();
-
+            String mensagem = "Erro: Senha incorreta ou nao confirmada.";
             if (!newPassword.equals(confirmaNewPassword)){
-                req.setAttribute("mensagem", "Erro: Nova senha e confirmação de senha não coincidem.");
+                req.setAttribute("mensagem", mensagem);
                 req.getRequestDispatcher(usuarioPath).forward(req, resp);
                 return;
             }
@@ -65,12 +65,29 @@ public class UsuarioServlet extends HttpServlet {
                 resp.sendRedirect(req.getContextPath() + "/usuario/logout");
 
             } else {
-                req.setAttribute("mensagem", "Erro: Senha atual incorreta.");
+                req.setAttribute("mensagem", mensagem);
                 req.getRequestDispatcher(usuarioPath).forward(req, resp);
             }
 
         } catch (ClassNotFoundException e) {
             req.setAttribute("error", e.getMessage());
+        }
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+        String username = (String) req.getSession().getAttribute("username");
+
+        try {
+            UsuarioDao usuarioDao = new UsuarioDao();
+            Usuario usuario = usuarioDao.buscaPorUsername(username);
+            usuarioDao.delete(usuario);
+            req.getSession().invalidate();
+            res.setStatus(HttpServletResponse.SC_OK);
+            res.getWriter().write("Conta deletada com sucesso");
+        } catch (ClassNotFoundException e) {
+            res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            res.getWriter().write("Error deleting account: " + e.getMessage());
         }
     }
 }

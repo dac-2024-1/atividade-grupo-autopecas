@@ -118,4 +118,16 @@ public class UsuarioDao {
             throw new RuntimeException(e);
         }
     }
+
+    public void delete(Usuario usuario) {
+        String sql = "delete from usuario where id=?";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setLong(1, usuario.getId());
+            stmt.execute();
+            stmt.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
