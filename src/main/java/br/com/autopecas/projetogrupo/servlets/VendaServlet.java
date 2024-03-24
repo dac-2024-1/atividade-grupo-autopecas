@@ -62,7 +62,7 @@ public class VendaServlet extends  HttpServlet{
             }
 
             String idString = req.getParameter("id");
-            if(idString != null && idString.trim().isEmpty()){
+            if(idString != null && !idString.trim().isEmpty()){
                 Long id = Long.parseLong(idString);
                 Venda venda =  null;
                 List<Venda> vendas = new ArrayList<>();

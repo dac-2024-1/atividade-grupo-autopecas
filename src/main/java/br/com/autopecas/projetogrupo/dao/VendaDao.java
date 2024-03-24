@@ -38,7 +38,6 @@ public class VendaDao {
 
     public Venda buscaVendaPorId(Long id){
         String sql = "select * from venda where id=?";
-
         try{
             PreparedStatement statement = this.connection.prepareStatement(sql);
             statement.setLong(1, id);
