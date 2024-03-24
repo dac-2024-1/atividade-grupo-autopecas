@@ -117,4 +117,16 @@ public class ServicoDao {
         }
     }
 
+    public void deletaServico(Long id){
+        try {
+            PreparedStatement stmt = connection.prepareStatement("delete from servico" +
+                    " where id=?");
+            stmt.setLong(1, id);
+            stmt.execute();
+            stmt.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }
