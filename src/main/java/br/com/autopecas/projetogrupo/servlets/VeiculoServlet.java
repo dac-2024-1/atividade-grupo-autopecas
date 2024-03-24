@@ -62,6 +62,7 @@ public class VeiculoServlet extends HttpServlet {
             e.printStackTrace();
         }
         String idStr = req.getParameter("id");
+        System.out.println(idStr);
         if( idStr != null && !idStr.trim().isEmpty()) {
             Long id = Long.parseLong(idStr);
             Veiculo veiculo = null;
