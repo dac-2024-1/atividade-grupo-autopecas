@@ -50,7 +50,7 @@ public class Registro extends HttpServlet {
 
             if(idFuncionario != null && !idFuncionario.isEmpty()){
                 long longFunId = Long.parseLong(idFuncionario);
-                funcionarioDao.associaUsuario(longFunId, userDao.buscaIdPorUsername(username));
+                funcionarioDao.associaUsuario(longFunId, userDao.buscaPorUsername(username).getId());
             }
 
         } catch (ClassNotFoundException | RuntimeException e) {
