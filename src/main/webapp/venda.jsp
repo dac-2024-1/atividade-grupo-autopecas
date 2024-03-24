@@ -55,8 +55,8 @@
                             <p>ID: ${venda.id}</p>
                             <p>Data: ${venda.data}</p>
                             <p>Total da venda: ${venda.totalVenda}</p>
-                            <p>Cliente: ${venda.cliente}</p>
-                            <p>Funcionário: ${venda.funcionario}</p>
+                            <p>Cliente: ${venda.cliente.id}</p>
+                            <p>Funcionário: ${venda.funcionario.id}</p>
                         </div>
                         <div class="button-group">
                             <form action="mvc" method="POST">

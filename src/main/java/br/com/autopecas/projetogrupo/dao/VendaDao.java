@@ -51,12 +51,12 @@ public class VendaDao {
                 venda.setId(resultSet.getLong("id"));
                 venda.setData(resultSet.getDate("data").toLocalDate());
                 venda.setTotalVenda(resultSet.getFloat("totalVenda"));
-                Cliente cliente = clienteDao.buscaClientePorId(resultSet.getLong("id"));
+                Cliente cliente = clienteDao.buscaClientePorId(resultSet.getLong("idCliente"));
                 venda.setCliente(cliente);
-                Funcionario funcionario = funcionarioDao.buscaPorId(resultSet.getLong("id"));
+                Funcionario funcionario = funcionarioDao.buscaPorId(resultSet.getLong("idFuncionario"));
                 venda.setFuncionario(funcionario);
             }
-            return  venda;
+            return venda;
         }
         catch (SQLException | ClassNotFoundException e){
             throw new RuntimeException(e);
@@ -78,11 +78,11 @@ public class VendaDao {
                 venda.setTotalVenda(resultSet.getFloat("totalVenda"));
 
                 ClienteDao clienteDao = new ClienteDao();
-                Cliente cliente = clienteDao.buscaClientePorId(resultSet.getLong("id"));
+                Cliente cliente = clienteDao.buscaClientePorId(resultSet.getLong("idCliente"));
                 venda.setCliente(cliente);
 
                 FuncionarioDao funcionarioDao = new FuncionarioDao();
-                Funcionario funcionario = funcionarioDao.buscaPorId(resultSet.getLong("id"));
+                Funcionario funcionario = funcionarioDao.buscaPorId(resultSet.getLong("idFuncionario"));
                 venda.setFuncionario(funcionario);
 
                 vendas.add(venda);
