@@ -13,7 +13,7 @@ public class DeletaVendaPeca implements Logica{
 
         VendaPecaDao vendaPecaDao;
         try{
-            vendaPecaDao = new vendaPecaDao();
+            vendaPecaDao = new VendaPecaDao();
             vendaPecaDao.deletaVendaPeca(id);
         }
         catch (ClassNotFoundException | RuntimeException e){

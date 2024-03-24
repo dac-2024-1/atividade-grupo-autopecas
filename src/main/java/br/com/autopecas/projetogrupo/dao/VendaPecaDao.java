@@ -2,9 +2,7 @@ package br.com.autopecas.projetogrupo.dao;
 
 import br.com.autopecas.projetogrupo.conexao.FabricaDeConexao;
 import br.com.autopecas.projetogrupo.entidades.Venda;
-
 import br.com.autopecas.projetogrupo.entidades.Peca;
-import br.com.autopecas.projetogrupo.dao.PecaDao;
 import br.com.autopecas.projetogrupo.entidades.VendaPeca;
 
 
@@ -24,13 +22,12 @@ public class VendaPecaDao {
     }
 
     public void associaVendaPeca (VendaPeca vendaPeca){
-        String sql = "insert into vendaPeca (id, idVenda, idPeca) values (?,?,?)";
+        String sql = "insert into vendaPeca (idVenda, idPeca) values (?,?)";
 
         try{
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setLong(1, vendaPeca.getId());
-            statement.setLong(2, vendaPeca.getVenda().getId());
-            statement.setLong(3, vendaPeca.getPeca().getId());
+            statement.setLong(1, vendaPeca.getVenda().getId());
+            statement.setLong(2, vendaPeca.getPeca().getId());
 
             statement.execute();
             statement.close();
@@ -48,7 +45,7 @@ public class VendaPecaDao {
             statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();
             VendaPeca vendaPeca = new VendaPeca();
-            VendaDao vendaDao = new vendaDao();
+            VendaDao vendaDao = new VendaDao();
             PecaDao pecaDao = new PecaDao();
 
             while (resultSet.next()){
@@ -73,7 +70,7 @@ public class VendaPecaDao {
 
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
-            VendaDao vendaDao = new vendaDao();
+            VendaDao vendaDao = new VendaDao();
             PecaDao pecaDao = new PecaDao();
 
 

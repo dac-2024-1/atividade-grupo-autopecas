@@ -2,8 +2,10 @@ package br.com.autopecas.projetogrupo.servlets;
 
 import br.com.autopecas.projetogrupo.dao.PecaDao;
 import br.com.autopecas.projetogrupo.dao.VendaPecaDao;
+import br.com.autopecas.projetogrupo.dao.VendaDao;
 
 import br.com.autopecas.projetogrupo.entidades.Peca;
+import br.com.autopecas.projetogrupo.entidades.Venda;
 import br.com.autopecas.projetogrupo.entidades.VendaPeca;
 
 import javax.servlet.ServletException;
@@ -21,7 +23,6 @@ public class VendaPecaServlet extends HttpServlet{
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException {
-        Long id = Long.parseLong(req.getParameter("id"));
         Long idVenda = Long.parseLong(req.getParameter("idVenda"));
         Long idPeca = Long.parseLong(req.getParameter("idPeca"));
 
@@ -30,7 +31,6 @@ public class VendaPecaServlet extends HttpServlet{
         VendaDao vendaDao = new VendaDao();
         PecaDao pecaDao = new PecaDao();
 
-        vendaPeca.setId(id);
         Venda venda = vendaDao.buscaVendaPorId(idVenda);
         vendaPeca.setVenda(venda);
 
@@ -82,5 +82,4 @@ public class VendaPecaServlet extends HttpServlet{
             }
             req.getRequestDispatcher("/vendaPeca.jsp").forward(req, res);
         }
-    }
 }
