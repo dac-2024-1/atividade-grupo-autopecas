@@ -9,11 +9,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <head>
         <meta charset="UTF-8">
         <title>Peças</title>
         <link rel="stylesheet" href="styleCss.css">
-    </head>
 </head>
 <body>
 <main class="container">
