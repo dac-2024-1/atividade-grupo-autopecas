@@ -53,17 +53,21 @@ public class FuncionarioServlet extends HttpServlet {
             FuncionarioDao dao = new FuncionarioDao();
             funSemUsuario = dao.buscaTodosSemUsuario();
             req.setAttribute("funcionarios", dao.buscaTodos());
+            Funcionario funFiltrado = null;
 
             String idStr = req.getParameter("id");
             if (idStr != null && !idStr.trim().isEmpty()) {
                 Long id = Long.parseLong(idStr);
-                Funcionario funcionario = null;
                 List<Funcionario> funcionarios = new ArrayList<>();
-                funcionario = dao.buscaPorId(id);
+                funFiltrado = dao.buscaPorId(id);
 
-                assert funcionario != null;
-                if (funcionario.getId() != null) {
-                    funcionarios.add(funcionario);
+                assert funFiltrado != null;
+                if (funFiltrado.getId() != null) {
+                    funcionarios.add(funFiltrado);
+                }
+                if (funFiltrado.getUsuario() != null) {
+                    funSemUsuario = new ArrayList<>();
+                    funSemUsuario.add(funFiltrado);
                 }
                 req.setAttribute("funcionarios", funcionarios);
 
@@ -74,11 +78,10 @@ public class FuncionarioServlet extends HttpServlet {
             req.getRequestDispatcher("/erro.jsp").forward(req, res);
         }
 
-        if(req.getRequestURI().endsWith("/usuario/registro/funcionario")) {
-
+        if (req.getRequestURI().endsWith("/usuario/registro/funcionario")) {
             req.setAttribute("funcionarios", funSemUsuario);
             req.getRequestDispatcher("/usuario/registro.jsp").forward(req, res);
-        } else if(req.getRequestURI().endsWith("/funcionario")) {
+        } else if (req.getRequestURI().endsWith("/funcionario")) {
             req.getRequestDispatcher("/funcionario.jsp").forward(req, res);
         }
     }
