@@ -99,4 +99,22 @@ public class ServicoDao {
 
     }
 
+    public void atualizaServico(Servico servico) {
+        String sql = "update servico set descricao=?, preco=?, data=?, idVeiculo=?, idFuncionario=? where id=?";
+
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setString(1, servico.getDescricao());
+            stmt.setFloat(2, servico.getPreco());
+            stmt.setDate(3, Date.valueOf(servico.getData()));
+            stmt.setLong(4, servico.getVeiculo().getId());
+            stmt.setLong(5, servico.getFuncionario().getId());
+            stmt.setLong(6, servico.getId());
+            stmt.execute();
+            stmt.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }
