@@ -93,7 +93,7 @@ public class VeiculoDao {
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setLong(1, veiculo.getCliente().getId());
-            stmt.setLong(1, veiculo.getId());
+            stmt.setLong(2, veiculo.getId());
             stmt.execute();
             stmt.close();
         } catch (SQLException e) {

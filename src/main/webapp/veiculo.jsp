@@ -19,8 +19,8 @@
             <input class="input" type="text" id="ano" name="ano" required/>
             <label for="placa">Placa:</label>
             <input class="input" type="text" id="placa" name="placa" required/>
-            <label for="idcliente">Cliente:</label>
-            <select class="campo-select input" id="idcliente" name="idcliente" required>
+            <label for="idCliente">Cliente:</label>
+            <select class="campo-select input" id="idCliente" name="idCliente" required>
                 <option value="" selected>Selecione um cliente</option>
                 <c:forEach var="cliente" items="${clientes}">
                     <option value="${cliente.id}">${cliente.id} - ${cliente.nome}</option>
@@ -84,7 +84,7 @@
                     <form action="mvc" method="POST" class="update-div hide">
                         <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap">
                             <label for="idcliente-${veiculo.cliente.id}">Cliente:</label>
-                            <select class="campo-select input" id="idcliente-${veiculo.cliente.id}" name="idcliente"
+                            <select class="campo-select input" id="idCliente-${veiculo.cliente.id}" name="idcliente"
                                     required>
                                 <option value="${veiculo.cliente.id}" selected>${veiculo.cliente.id}
                                     - ${veiculo.cliente.nome}</option>
