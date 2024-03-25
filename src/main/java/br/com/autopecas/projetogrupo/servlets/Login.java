@@ -43,7 +43,7 @@ public class Login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         if (req.getSession().getAttribute("username") != null) {
-            res.sendRedirect(req.getContextPath() + "paginaInicial.html");
+            res.sendRedirect(req.getContextPath() + "/paginaInicial.html");
         } else {
             req.getRequestDispatcher(loginPath).forward(req, res);
         }
