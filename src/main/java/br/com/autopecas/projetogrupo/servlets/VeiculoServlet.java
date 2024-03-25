@@ -57,12 +57,13 @@ public class VeiculoServlet extends HttpServlet {
         VeiculoDao dao;
         try {
             dao = new VeiculoDao();
+            ClienteDao clienteDao = new ClienteDao();
             req.setAttribute("veiculos", dao.buscaTodosVeiculos());
+            req.setAttribute("clientes", clienteDao.buscaTodosClientes());
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
         String idStr = req.getParameter("id");
-        System.out.println(idStr);
         if( idStr != null && !idStr.trim().isEmpty()) {
             Long id = Long.parseLong(idStr);
             Veiculo veiculo = null;
