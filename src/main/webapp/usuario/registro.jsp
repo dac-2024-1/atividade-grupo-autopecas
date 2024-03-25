@@ -38,9 +38,9 @@
                 <input class="input-form" type="password" id="password" name="password">
                 <label class="texto-basico" for="confirmaSenha">Confrime sua senha:</label>
                 <input class="input-form" type="password" id="confirmaSenha" name="confirmaSenha">
-                <label class="texto-basico" for="lista-funcionarios">Selecione o funcionario:</label>
-                <div id="lista-funcionarios">
-                    <c:forEach var="funcionario" items="${funcionarios}">
+                <c:forEach var="funcionario" items="${funcionarios}">
+                    <label class="texto-basico" for="lista-funcionarios">Selecione o funcionario:</label>
+                    <div id="lista-funcionarios">
                         <div class="bloco-funcionario">
                             <p class="info-funcionario">ID: ${funcionario.id}</p>
                             <p class="info-funcionario">Nome: ${funcionario.nome}</p>
@@ -50,37 +50,42 @@
                                 <input type="radio" id="idFuncionario" name="idFuncionario" value="${funcionario.id}">
                             </div>
                         </div>
-                    </c:forEach>
-                </div>
+                    </div>
+                </c:forEach>
 
                 <div id="botoes">
                     <input class="botao-padrao" type="submit" value="Registrar">
-                    <a href="${pageContext.request.contextPath}/usuario/login"><div id="botao-login" class="botao-padrao">Login</div></a>
+                    <a href="${pageContext.request.contextPath}/usuario/login">
+                        <div id="botao-login" class="botao-padrao">Login</div>
+                    </a>
                 </div>
 
             </form>
         </div>
 
-        <div id="div-filtro">
-            <%--@elvariable id="funcionarios" type="List<br.com.autopecas.projetogrupo.entidades.Funcionario>"--%>
-            <c:if test="${!funcionarios.isEmpty()}">
+        <%--@elvariable id="funcionarios" type="List<br.com.autopecas.projetogrupo.entidades.Funcionario>"--%>
+        <c:if test="${!funcionarios.isEmpty()}">
+            <div id="div-filtro">
 
-                <form action="${pageContext.request.contextPath}/usuario/registro/funcionario" method="GET" class="search-form">
+                <form action="${pageContext.request.contextPath}/usuario/registro/funcionario" method="GET"
+                      class="search-form">
                     <label class="texto-basico" for="id">Buscar funcionário por id:</label>
                     <div id="campo-busca">
-                        <input class="input-form" id="id" type="text" class="search-input" placeholder="Buscar funcionario por id..." name="id">
+                        <input class="input-form" id="id" type="text" class="search-input"
+                               placeholder="Buscar funcionario por id..." name="id">
                         <button id="botao-buscar" class="search-button" type="submit">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                 fill="none"
                                  stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
                                  class="lucide lucide-search">
-                                <circle cx="11" cy="11" r="8" />
-                                <path d="m21 21-4.3-4.3" />
+                                <circle cx="11" cy="11" r="8"/>
+                                <path d="m21 21-4.3-4.3"/>
                             </svg>
+                        </button>
                     </div>
-                    </button>
                 </form>
-            </c:if>
-        </div>
+            </div>
+        </c:if>
 
     </div>
 </main>
