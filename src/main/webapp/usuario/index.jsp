@@ -13,39 +13,61 @@
 
 <html>
 <head>
-    <title>Perfil de ${username}</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/base.css">
+    <link rel="stylesheet" href="style/perfilUsuario.css">
+    <title>Perfil de ${username} | Tonhão Autopeças</title>
 </head>
 <body>
-<h1>Perfil de ${username}.</h1>
 
-<c:if test="${funcionario.id != null}">
-    <h2>Informações do funcionario</h2>
-    <p>Nome: ${funcionario.nome}</p>
-    <p>Cargo: ${funcionario.cargo}</p>
-    <p>Endereço: ${funcionario.endereco}</p>
-    <p>Telefone: ${funcionario.telefone}</p>
-    <p>Salario: ${funcionario.salario}</p>
-    <p>Data de contrataçao: ${funcionario.dataContratacao}</p>
-    <a href="funcionario?id=${funcionario.id}">Alterar dados ou remover funcionario na pagina /funcionarios.</a>
-</c:if>
-<h2>Alterar senha</h2>
-<c:if test="${mensagem.contains(\"Erro\")}">
-    <p style="color: red">${mensagem}</p>
-</c:if>
-<form action="${pageContext.request.contextPath}/usuario" method="post">
-    <label for="senhaAtual">Senha atual:</label><br>
-    <input type="password" id="senhaAtual" name="senhaAtual"><br>
-    <label for="newPassword">Nova senha:</label><br>
-    <input type="password" id="newPassword" name="newPassword"><br>
-    <label for="confirmaNewPassword">Confirme a nova senha:</label><br>
-    <input type="password" id="confirmaNewPassword" name="confirmaNewPassword"><br>
-    <br>
-    <input type="submit" value="Atualizar senha">
-</form>
+<nav id="menu-usuario">
+    <a class="link-menu" href="paginaInicial.html">Pagina Inicial</a>
+    <a class="link-menu" href="/usuario/logout">Logout</a>
+    </span>
+</nav>
 
-<button id="buttonDelete" onclick="deleteAccount()">Deletar Conta</button>
-<br><br>
-<a href="${pageContext.request.contextPath}/usuario/logout">Logout</a>
+<main>
+
+    <h1>Perfil de ${username}</h1>
+
+    <div id="conteudo">
+
+        <c:if test="${funcionario.id != null}">
+        <div id="perfil" style="display: flex;">
+            <h2>Informações do funcionario</h2>
+            <div id="info-funcionario">
+                <p class="texto-basico">Nome: ${funcionario.nome}</p>
+                <p class="texto-basico">Cargo: ${funcionario.cargo}</p>
+                <p class="texto-basico">Endereço: ${funcionario.endereco}</p>
+                <p class="texto-basico">Telefone: ${funcionario.telefone}</p>
+                <p class="texto-basico">Salario: ${funcionario.salario}</p>
+                <p class="texto-basico">Data de contrataçao: ${funcionario.dataContratacao}</p>
+            </div>
+            <a class="botao-padrao" id="botao-funcionario" href="funcionario?id=1">Alterar dados do Funcionario</a>
+
+        </div>
+        </c:if>
+
+        <div id="conteudo-alterar">
+            <div id="alterar-senha">
+
+                <h2>Alterar senha</h2>
+
+                <form action="${pageContext.request.contextPath}/usuario" method="post">
+                    <label class="texto-basico" for="senhaAtual">Senha atual:</label>
+                    <input class="input-form" type="password" id="senhaAtual" name="senhaAtual">
+                    <label class="texto-basico" for="newPassword">Nova senha:</label>
+                    <input class="input-form" type="password" id="newPassword" name="newPassword">
+                    <label class="texto-basico" for="confirmaNewPassword">Confirme a nova senha:</label>
+                    <input class="input-form" type="password" id="confirmaNewPassword" name="confirmaNewPassword">
+                    <input class="botao-padrao" id="botao-atualizar" type="submit" value="Atualizar senha">
+                </form>
+            </div>
+            <button class="botao-padrao" id="buttonDelete" onclick="deleteAccount()">Deletar Conta</button>
+        </div>
+    </div>
+</main>
 </body>
 <script>
     function deleteAccount() {

@@ -22,7 +22,7 @@ public class VeiculoServlet extends HttpServlet {
         String modelo = req.getParameter("modelo");
         String ano = req.getParameter("ano");
         String placa = req.getParameter("placa");
-        Long idCliente = Long.parseLong(req.getParameter("idcliente"));
+        Long idCliente = Long.parseLong(req.getParameter("idCliente"));
 
         Veiculo veiculo = new Veiculo();
         veiculo.setMarca(marca);

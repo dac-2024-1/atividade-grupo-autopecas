@@ -1,0 +1,79 @@
+main {
+    width: 900px;
+    height: 550px;
+}
+
+#conteudo {
+    display: flex;
+    gap: 30px;
+}
+
+#lista-funcionarios {
+    height: 130px;
+    max-height: 130;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    scrollbar-width: thin;
+}
+
+.bloco-funcionario {
+    background:#CAD2C5;
+    padding: 10px 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.info-funcionario {
+    font-weight: 600;
+    color: #2F3E46;
+}
+
+#selecionar-funcionario {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    margin-top: 7px;
+    margin-left: 10px;
+}
+
+#botoes {
+    align-self: center;
+    display: flex;
+    gap: 3px;
+}
+
+#botao-login {
+    display: inline-block;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+#div-filtro {
+    width: 400px;
+}
+
+#campo-busca {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+}
+
+#botao-buscar {
+    width: 37px;
+    height: 37px;
+    background-color: #52796F;
+    border-radius: 10px;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+#botao-buscar:hover{
+    background-color: #2F3E46;
+    transition: 0.5s;
+}
+
+#id{ 
+    width: 340px;
+}

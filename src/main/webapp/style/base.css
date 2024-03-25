@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Arimo", sans-serif;
+    border: none;
+    text-decoration: none;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    background-color: #CAD2C5;
+}
+
+h1{
+    color: #52796F;
+    font-weight: bolder;
+    font-size: 2.5rem;
+    text-transform: uppercase;
+}   
+
+h2{
+    color: #2F3E46;
+}
+
+.botao-padrao {
+    font-size: 0.9rem;
+    background-color: #52796F;
+    border: none;
+    padding: 0.75rem 2rem;
+    align-self: start;
+    border-radius: 20px;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    width: 200px;
+    transition: 0.5s;
+}
+
+.botao-padrao:hover {
+    background-color: #2F3E46;
+    transition: 0.5s;
+}
+
+.texto-basico {
+    font-weight: 600;
+    color: #2F3E46;
+}
