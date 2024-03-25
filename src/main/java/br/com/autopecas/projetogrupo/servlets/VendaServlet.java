@@ -55,7 +55,11 @@ public class VendaServlet extends  HttpServlet{
             VendaDao vendaDao;
             try {
                 vendaDao = new VendaDao();
+                ClienteDao clienteDao = new ClienteDao();
+                FuncionarioDao funcionarioDao = new FuncionarioDao();
                 req.setAttribute("vendas", vendaDao.buscaTodasVendas());
+                req.setAttribute("clientes", clienteDao.buscaTodosClientes());
+                req.setAttribute("funcionarios", funcionarioDao.buscaTodos());
             }
             catch (ClassNotFoundException e) {
                 e.printStackTrace();

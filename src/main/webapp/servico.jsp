@@ -35,6 +35,7 @@
             </select>
             <input type="submit" value="Cadastrar" class="submit"/>
         </form>
+        <a href="servicoPeca.jsp">Deseja cadastrar as peças incluídas na venda?</a>
     </div>
     <div class="content" id="col2">
         <div>

@@ -20,7 +20,12 @@
             <label for="placa">Placa:</label>
             <input class="input" type="text" id="placa" name="placa" required/>
             <label for="idcliente">Id do cliente:</label>
-            <input class="input" type="text" id="idcliente" name="idcliente" required/>
+            <select class="campo-select input" id="idcliente" name="idcliente" required>
+                <option value="" selected>Selecione um cliente</option>
+                <c:forEach var="cliente" items="${clientes}">
+                    <option value="${cliente.id}">${cliente.id} - ${cliente.nome}</option>
+                </c:forEach>
+            </select>
             <input type="submit" value="Cadastrar" class="submit"/>
         </form>
     </div>

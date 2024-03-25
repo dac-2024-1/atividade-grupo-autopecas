@@ -27,13 +27,23 @@
             <label for="totalVenda">Total da venda:</label>
             <input class="input" type="number" id="totalVenda" name="totalVenda" required/>
             <label for="idCliente">Id do cliente:</label>
-            <input class="input" type="text" id="idCliente" name="idCliente" required/>
+            <select class="campo-select input" id="idCliente" name="idCliente" required>
+                <option value="" selected>Selecione um cliente</option>
+                <c:forEach var="cliente" items="${clientes}">
+                    <option value="${cliente.id}">${cliente.id} - ${cliente.nome}</option>
+                </c:forEach>
+            </select>
             <label for="idFuncionario">Id do funcionário:</label>
-            <input class="input" type="text" id="idFuncionario" name="idFuncionario" required/>
-
+            <select class=" campo-select input" id="idFuncionario" name="idFuncionario" required>
+                <option value="" selected>Selecione um funcionário</option>
+                <c:forEach var="funcionario" items="${funcionarios}">
+                    <option value="${funcionario.id}">${funcionario.id} - ${funcionario.nome}</option>
+                </c:forEach>
+            </select>
 
             <input type="submit" value="Cadastrar" class="submit"/>
         </form>
+        <a href="vendaPeca.jsp">Deseja cadastrar as peças incluídas na venda?</a>
     </div>
     <div class="content" id="col2">
         <div>
@@ -55,8 +65,8 @@
                             <p>ID: ${venda.id}</p>
                             <p>Data: ${venda.data}</p>
                             <p>Total da venda: ${venda.totalVenda}</p>
-                            <p>Cliente: ${venda.cliente.id}</p>
-                            <p>Funcionário: ${venda.funcionario.id}</p>
+                            <p>Cliente: ${venda.cliente.id} - ${venda.cliente.nome}</p>
+                            <p>Funcionário: ${venda.funcionario.id} - ${venda.funcionario.nome}</p>
                         </div>
                         <div class="button-group">
                             <form action="mvc" method="POST">

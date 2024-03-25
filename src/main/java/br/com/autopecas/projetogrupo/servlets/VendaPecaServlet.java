@@ -52,7 +52,11 @@ public class VendaPecaServlet extends HttpServlet{
 
         try{
             vendaPecaDao = new VendaPecaDao();
+            VendaDao vendaDao = new VendaDao();
+            PecaDao pecaDao = new PecaDao();
             req.setAttribute("vendaPecas", vendaPecaDao.buscaTodasVendaPeca());
+            req.setAttribute("vendas", vendaDao.buscaTodasVendas());
+            req.setAttribute("pecas", pecaDao.BuscaTodasPecas());
         }
         catch (ClassNotFoundException e){
             e.printStackTrace();

@@ -18,13 +18,23 @@
 <body>
 <main class="container">
     <div class="content">
-        <h1 class="title">Cadastrar peça</h1>
+        <h1 class="title">Cadastrar venda de peça</h1>
         <form action="/vendaPeca" method="POST" class="form">
             <label for="idVenda">Id da venda:</label>
-            <input class="input" type="text" id="idVenda" name="idVenda" required/>
+            <select class="campo-select input" id="idVenda" name="idVenda" required>
+                <option value="" selected>Selecione uma venda</option>
+                <c:forEach var="venda" items="${vendas}">
+                    <option value="${venda.id}">Funcionário responsável: ${venda.funcionario.nome}
+                        - Cliente: ${venda.cliente.nome}</option>
+                </c:forEach>
+            </select>
             <label for="idPeca">Id da peça:</label>
-            <input class="input" type="text" id="idPeca" name="idPeca" required/>
-
+            <select class="campo-select input" id="idPeca" name="idPeca" required>
+                <option value="" selected>Selecione uma peça</option>
+                <c:forEach var="peca" items="${pecas}">
+                    <option value="${peca.id}">${peca.id} - Descrição: ${peca.descricao} | ${peca.preco} R$ | ${peca.quantidadeEstoque} unidades</option>
+                </c:forEach>
+            </select>
             <input type="submit" value="Cadastrar" class="submit"/>
         </form>
     </div>
