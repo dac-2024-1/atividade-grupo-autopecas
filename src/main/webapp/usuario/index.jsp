@@ -34,19 +34,20 @@
     <div id="conteudo">
 
         <c:if test="${funcionario.id != null}">
-        <div id="perfil" style="display: flex;">
-            <h2>Informações do funcionario</h2>
-            <div id="info-funcionario">
-                <p class="texto-basico">Nome: ${funcionario.nome}</p>
-                <p class="texto-basico">Cargo: ${funcionario.cargo}</p>
-                <p class="texto-basico">Endereço: ${funcionario.endereco}</p>
-                <p class="texto-basico">Telefone: ${funcionario.telefone}</p>
-                <p class="texto-basico">Salario: ${funcionario.salario}</p>
-                <p class="texto-basico">Data de contrataçao: ${funcionario.dataContratacao}</p>
-            </div>
-            <a class="botao-padrao" id="botao-funcionario" href="funcionario?id=1">Alterar dados do Funcionario</a>
+            <div id="perfil" style="display: flex;">
+                <h2>Informações do funcionario</h2>
+                <div id="info-funcionario">
+                    <p class="texto-basico">Nome: ${funcionario.nome}</p>
+                    <p class="texto-basico">Cargo: ${funcionario.cargo}</p>
+                    <p class="texto-basico">Endereço: ${funcionario.endereco}</p>
+                    <p class="texto-basico">Telefone: ${funcionario.telefone}</p>
+                    <p class="texto-basico">Salario: ${funcionario.salario}</p>
+                    <p class="texto-basico">Data de contrataçao: ${funcionario.dataContratacao}</p>
+                </div>
+                <a class="botao-padrao" id="botao-funcionario" href="funcionario?id=${funcionario.id}">Alterar dados do
+                    Funcionario</a>
 
-        </div>
+            </div>
         </c:if>
 
         <div id="conteudo-alterar">
