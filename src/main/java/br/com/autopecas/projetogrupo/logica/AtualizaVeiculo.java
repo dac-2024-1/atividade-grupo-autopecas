@@ -15,7 +15,7 @@ public class AtualizaVeiculo implements Logica {
     @Override
     public void executa(HttpServletRequest req, HttpServletResponse res) throws Exception{
         Long id = Long.parseLong(req.getParameter("id"));
-        Long idCliente = Long.parseLong(req.getParameter("idCliente"));
+        Long idCliente = Long.valueOf(req.getParameter("idCliente"));
 
         VeiculoDao veiculoDao;
 

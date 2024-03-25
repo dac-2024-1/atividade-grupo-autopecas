@@ -83,18 +83,20 @@
                     </div>
                     <form action="mvc" method="POST" class="update-div hide">
                         <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap">
-                            <label for="idcliente-${veiculo.cliente.id}">Cliente:</label>
-                            <select class="campo-select input" id="idCliente-${veiculo.cliente.id}" name="idcliente"
+                            <label for="idCliente-${veiculo.cliente.id}">Cliente:</label>
+                            <select class="campo-select input" id="idCliente-${veiculo.cliente.id}" name="idCliente"
                                     required>
                                 <option value="${veiculo.cliente.id}" selected>${veiculo.cliente.id}
                                     - ${veiculo.cliente.nome}</option>
                                 <c:forEach var="cliente" items="${clientes}">
-                                    <option value="${cliente.id}">${cliente.id} - ${cliente.nome}</option>
+                                    <c:if test="${cliente.id != veiculo.cliente.id}">
+                                        <option value="${cliente.id}">${cliente.id} - ${cliente.nome}</option>
+                                    </c:if>
                                 </c:forEach>
                             </select>
                         </div>
-                        <input type="hidden" name="id" value="${venda.id}">
-                        <input type="hidden" name="logica" value="AtualizaVenda"/>
+                        <input type="hidden" name="id" value="${veiculo.id}">
+                        <input type="hidden" name="logica" value="AtualizaVeiculo"/>
                         <input type="submit" value="Atualizar" class="submit update"/>
                     </form>
                 </div>
