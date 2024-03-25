@@ -64,9 +64,18 @@ public class FuncionarioDao {
 
     public Funcionario buscaPorId(Long id) {
         String sql = "select * from funcionario where id = ?";
+        return getFuncionario(id, sql);
+    }
+
+    public Funcionario buscaPorUserId(Long userId) {
+        String sql = "select * from funcionario where idusuario = ?";
+        return getFuncionario(userId, sql);
+    }
+
+    private Funcionario getFuncionario(Long userId, String sql) {
         try {
             PreparedStatement stmt = this.connection.prepareStatement(sql);
-            stmt.setLong(1, id);
+            stmt.setLong(1, userId);
             ResultSet rs = stmt.executeQuery();
             Funcionario funcionario = new Funcionario();
             while (rs.next()) {
@@ -101,12 +110,12 @@ public class FuncionarioDao {
     public void deletaFuncionario(Long id) {
         try {
             Funcionario funcionario = buscaPorId(id);
+            Long userId = funcionario.getUsuario().getId();
             PreparedStatement stmt = connection.prepareStatement("delete from funcionario where id=?");
             stmt.setLong(1, id);
             stmt.execute();
             stmt.close();
 
-            Long userId = funcionario.getUsuario().getId();
             if (userId != null) {
                 userDao.deletaUsuario(userId);
             }

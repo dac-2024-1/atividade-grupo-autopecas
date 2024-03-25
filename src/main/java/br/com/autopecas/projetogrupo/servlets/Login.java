@@ -13,6 +13,7 @@ import java.io.IOException;
 @WebServlet(name = "Login", value = "/usuario/login")
 public class Login extends HttpServlet {
     String loginPath = "/usuario/login.jsp";
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         String username = req.getParameter("username");
@@ -42,9 +43,9 @@ public class Login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         if (req.getSession().getAttribute("username") != null) {
-            res.sendRedirect(req.getContextPath() + "/");
+            res.sendRedirect(req.getContextPath() + "/usuario");
         } else {
-        getServletContext().getRequestDispatcher(loginPath).forward(req, res);
+            req.getRequestDispatcher(loginPath).forward(req, res);
         }
     }
 }
