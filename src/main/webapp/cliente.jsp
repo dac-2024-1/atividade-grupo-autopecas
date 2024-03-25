@@ -59,7 +59,7 @@
                     <div class="bloco-botoes">
                         <form id="botao-excluir" action="mvc" method="POST">
                             <input type="hidden" name="id" value="${cliente.id}">
-                            <input type="hidden" name="logica" value="DeletaVeiculo" />
+                            <input type="hidden" name="logica" value="DeletaCliente" />
                             <button class="botao-padrao botao-listar" type="submit">Excluir</button>
                         </form>
                         <button class="botao-padrao botao-listar update-button">Atualizar</button>

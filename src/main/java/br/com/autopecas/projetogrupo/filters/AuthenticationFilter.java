@@ -18,7 +18,8 @@ public class AuthenticationFilter implements Filter {
         String requestURI = request.getRequestURI();
 //        if (request.getSession().getAttribute("username") == null
 //                && !requestURI.endsWith("/usuario/login")
-//                && !requestURI.endsWith("/usuario/registro")) {
+//                && !requestURI.endsWith("/usuario/registro")
+//                && !requestURI.contains("style")) {
 //            request.setAttribute("mensagem", "Você precisa estar logado para acessar " + requestURI + ".");
 //            request.getRequestDispatcher("/usuario/login.jsp").forward(request, response);
 //            return;

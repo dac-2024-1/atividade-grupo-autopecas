@@ -61,9 +61,9 @@
             </form>
         </div>
 
-        <div id="div-filtro">
             <%--@elvariable id="funcionarios" type="List<br.com.autopecas.projetogrupo.entidades.Funcionario>"--%>
             <c:if test="${!funcionarios.isEmpty()}">
+        <div id="div-filtro">
 
                 <form action="${pageContext.request.contextPath}/usuario/registro/funcionario" method="GET" class="search-form">
                     <label class="texto-basico" for="id">Buscar funcionário por id:</label>
@@ -79,8 +79,8 @@
                     </div>
                     </button>
                 </form>
-            </c:if>
         </div>
+            </c:if>
 
     </div>
 </main>

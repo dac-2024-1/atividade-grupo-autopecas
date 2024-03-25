@@ -3,107 +3,103 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <head>
     <meta charset="UTF-8">
-    <title>Veiculos</title>
-    <link rel="stylesheet" href="styleCss.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/base.css">
+    <link rel="stylesheet" href="style/paginasConteudo.css">
+    <title>Veiculo | Tonhão Autopeças</title>
 </head>
 <body>
-<main class="container">
-    <div class="content">
-        <h1 class="title">Cadastrar veiculo</h1>
-        <form action="veiculo" method="POST" class="form">
-            <label for="marca">Marca:</label>
-            <input class="input" type="text" id="marca" name="marca" required/>
-            <label for="modelo">Modelo:</label>
-            <input class="input" type="text" id="modelo" name="modelo" required/>
-            <label for="ano">Ano:</label>
-            <input class="input" type="text" id="ano" name="ano" required/>
-            <label for="placa">Placa:</label>
-            <input class="input" type="text" id="placa" name="placa" required/>
-            <label for="idCliente">Cliente:</label>
-            <select class="campo-select input" id="idCliente" name="idCliente" required>
-                <option value="" selected>Selecione um cliente</option>
-                <c:forEach var="cliente" items="${clientes}">
-                    <option value="${cliente.id}">${cliente.id} - ${cliente.nome}</option>
-                </c:forEach>
-            </select>
-            <input type="submit" value="Cadastrar" class="submit"/>
-        </form>
-    </div>
-    <div class="content" id="col2">
-        <div>
-            <form action="veiculo" method="GET" class="search-form">
-                <input type="text" class="search-input" placeholder="Buscar veículo por id..." name="id">
-                <button class="search-button" type="submit">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                         stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-                         class="lucide lucide-search">
-                        <circle cx="11" cy="11" r="8"/>
-                        <path d="m21 21-4.3-4.3"/>
-                    </svg>
-                </button>
+
+<nav id="menu-usuario">
+    <a class="link-menu" href="paginaInicial.html">Pagina Inicial</a>
+    <a class="link-menu" href="/usuario/logout">Logout</a>
+</nav>
+
+<main>
+    <h1>Cadastrar veiculo</h1>
+
+    <div id="conteudo">
+
+        <div id="div-form">
+
+            <form action="veiculo" method="POST" class="form">
+                <label class="texto-basico" for="marca">Marca:</label>
+                <input class="input-form" type="text" id="marca" name="marca" required />
+                <label class="texto-basico" for="modelo">Modelo:</label>
+                <input class="input-form" type="text" id="modelo" name="modelo" required />
+                <label class="texto-basico" for="ano">Ano:</label>
+                <input class="input-form" type="text" id="ano" name="ano" required />
+                <label class="texto-basico" for="placa">Placa:</label>
+                <input class="input-form" type="text" id="placa" name="placa" required />
+                <label class="texto-basico" for="idCliente">Cliente:</label>
+                <select class="campo-select input-form" id="idCliente" name="idCliente" required>
+                    <option value="" selected>Selecione um cliente</option>
+                    <c:forEach var="cliente" items="${clientes}">
+                        <option value="${cliente.id}">${cliente.id} - ${cliente.nome}</option>
+                    </c:forEach>
+                </select>
+                <input class="botao-padrao" type="submit" value="Cadastrar" class="submit" />
             </form>
-            <c:forEach var="veiculo" items="${veiculos}">
-                <div class="block">
-                    <div style="display: flex; width: 100%; justify-content: space-between">
-                        <div>
-                            <p>ID: ${veiculo.id}</p>
-                            <p>Marca: ${veiculo.marca}</p>
-                            <p>Modelo: ${veiculo.modelo}</p>
-                            <p>Ano: ${veiculo.ano}</p>
-                            <p>Ano: ${veiculo.placa}</p>
-                            <p>Cliente: ${veiculo.cliente.id} - ${veiculo.cliente.nome}</p>
-                        </div>
-                        <div class="button-group">
-                            <form action="mvc" method="POST">
-                                <input type="hidden" name="id" value="${veiculo.id}">
-                                <input type="hidden" name="logica" value="DeletaVeiculo"/>
-                                <button class="icon-button" type="submit">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-                                         fill="none"
-                                         stroke="rgb(0, 128, 128)" stroke-width="1" stroke-linecap="round"
-                                         stroke-linejoin="round"
-                                         class="lucide lucide-trash-2">
-                                        <path d="M3 6h18"/>
-                                        <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/>
-                                        <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/>
-                                        <line x1="10" x2="10" y1="11" y2="17"/>
-                                        <line x1="14" x2="14" y1="11" y2="17"/>
-                                    </svg>
-                                </button>
-                            </form>
-                            <button class="icon-button update-button">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-                                     fill="none" stroke="rgb(0, 128, 128)" stroke-width="1" stroke-linecap="round"
-                                     stroke-linejoin="round" class="lucide lucide-square-pen">
-                                    <path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-                                    <path d="M18.375 2.625a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4Z"/>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                    <form action="mvc" method="POST" class="update-div hide">
-                        <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap">
-                            <label for="idCliente-${veiculo.cliente.id}">Cliente:</label>
-                            <select class="campo-select input" id="idCliente-${veiculo.cliente.id}" name="idCliente"
-                                    required>
-                                <option value="${veiculo.cliente.id}" selected>${veiculo.cliente.id}
-                                    - ${veiculo.cliente.nome}</option>
-                                <c:forEach var="cliente" items="${clientes}">
-                                    <c:if test="${cliente.id != veiculo.cliente.id}">
-                                        <option value="${cliente.id}">${cliente.id} - ${cliente.nome}</option>
-                                    </c:if>
-                                </c:forEach>
-                            </select>
-                        </div>
-                        <input type="hidden" name="id" value="${veiculo.id}">
-                        <input type="hidden" name="logica" value="AtualizaVeiculo"/>
-                        <input type="submit" value="Atualizar" class="submit update"/>
-                    </form>
+
+        </div>
+
+        <div id="div-listar">
+
+            <form action="veiculo" method="GET" class="search-form">
+                <label class="texto-basico" for="id">Buscar veiculo por id:</label>
+                <div id="campo-busca">
+                    <input class="input-form" id="id" type="text" placeholder="Buscar veículo por id..." name="id">
+                    <button id="botao-buscar" class="search-button" type="submit">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                             fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"
+                             stroke-linejoin="round" class="lucide lucide-search">
+                            <circle cx="11" cy="11" r="8" />
+                            <path d="m21 21-4.3-4.3" />
+                        </svg>
+                    </button>
                 </div>
-            </c:forEach>
+            </form>
+
+            <div id="conteudo-listado">
+                <c:forEach var="veiculo" items="${veiculos}">
+                <div class="bloco-conteudo">
+                    <div class="bloco-info-conteudo">
+                        <p class="texto-basico">ID: ${veiculo.id}</p>
+                        <p class="texto-basico">Marca: ${veiculo.marca}</p>
+                        <p class="texto-basico">Modelo: ${veiculo.modelo}</p>
+                        <p class="texto-basico">Ano: ${veiculo.ano}</p>
+                        <p class="texto-basico">Placa: ${veiculo.placa}</p>
+                        <p class="texto-basico">Cliente: ${veiculo.cliente.id} - ${veiculo.cliente.nome}</p>
+                    </div>
+                    <div class="bloco-botoes">
+                        <form id="botao-excluir" action="mvc" method="POST">
+                            <input type="hidden" name="id" value="${veiculo.id}">
+                            <input type="hidden" name="logica" value="DeletaVeiculo" />
+                            <button class="botao-padrao botao-listar" type="submit">Excluir</button>
+                        </form>
+                        <button class="botao-padrao botao-listar update-button">Atualizar</button>
+                    </div>
+                    <div class="info-atualizar">
+                        <form id="form-atualizar" action="mvc" method="POST" class="update-div hide">
+                            <div class="campo-atualizar">
+                                <label class="texto-basico" for="idCliente-4">Cliente:</label>
+                                <select class="campo-select input-form" id="idCliente-4" name="idCliente" required>
+                                    <option value="4" selected>4 - Mauricio Bernardo Dantas</option>
+                                    <option value="3">3 - aa</option>
+                                    <option value="5">5 - Vibes</option>
+                                </select>
+                                <input type="hidden" name="id" value="${veiculo.id}">
+                                <input type="hidden" name="logica" value="AtualizaVeiculo" />
+                                <input id="botao-atualizar" class="botao-padrao" type="submit" value="Atualizar" class="submit update" />
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+                </c:forEach>
+            </div>
         </div>
     </div>
-
 </main>
 <script src="script.js"></script>
 </body>
