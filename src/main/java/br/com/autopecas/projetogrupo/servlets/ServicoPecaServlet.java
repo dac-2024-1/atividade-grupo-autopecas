@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet(name = "ServicoPeca", value = "/servicopeca")
+@WebServlet(name = "servicoPeca", urlPatterns = "/servicopeca")
 public class ServicoPecaServlet extends HttpServlet {
 
     @Override
@@ -31,7 +31,7 @@ public class ServicoPecaServlet extends HttpServlet {
             Servico servico = servicoDao.buscaServicoPorId(Long.parseLong(idServico));
             servicoPeca.setServico(servico);
             PecaDao pecaDao = new PecaDao();
-            Peca peca = pecaDao.buscaPecaPorId(Long.parseLong(idServico));
+            Peca peca = pecaDao.buscaPecaPorId(Long.parseLong(idPeca));
             servicoPeca.setPeca(peca);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -40,6 +40,7 @@ public class ServicoPecaServlet extends HttpServlet {
         ServicoPecaDao dao;
         try {
             dao = new ServicoPecaDao();
+            System.out.printf(servicoPeca.getServico().getId().toString());
             dao.registraServicoPeca(servicoPeca);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -78,10 +79,8 @@ public class ServicoPecaServlet extends HttpServlet {
             if (servicoPeca.getId() != null){
                 servicosPecas.add(servicoPeca);
             }
-
-            req.getRequestDispatcher("/servicopeca.jsp").forward(req, res);
         }
-
+        req.getRequestDispatcher("/servicopeca.jsp").forward(req, res);
     }
 
 }
