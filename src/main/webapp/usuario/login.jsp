@@ -17,12 +17,9 @@
     <a href="${pageContext.request.contextPath}/usuario/registro">Registre-se</a>
     <%--@elvariable id="mensagem" type="java.lang.String"--%>
     <c:if test="${mensagem != null and !mensagem.trim().isEmpty()}">
-        <p>
-            ${mensagem}
-        </p>
+        <p>${mensagem}</p>
     </c:if>
     <form action="${pageContext.request.contextPath}/usuario/login" method="post">
-        <input type="hidden" name="logica" value="LoginUsuario" />
         <label for="username">Nome de usuário:</label><br>
         <input type="text" id="username" name="username"><br>
         <label for="password">Senha:</label><br>

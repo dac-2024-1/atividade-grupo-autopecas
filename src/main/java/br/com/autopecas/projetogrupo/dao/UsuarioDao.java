@@ -58,6 +58,20 @@ public class UsuarioDao {
         }
     }
 
+    public void updatePassword(Usuario usuario) {
+        String sql = "update usuario set password=? where username=?";
+        try {
+            String hashedPassword = BCrypt.hashpw(usuario.getPassword(), BCrypt.gensalt());
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setString(1, hashedPassword);
+            stmt.setString(2, usuario.getUsername());
+            stmt.execute();
+            stmt.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public Usuario buscaPorId(Long id) {
         String sql = "select * from usuario where id=?";
         try {
@@ -86,17 +100,32 @@ public class UsuarioDao {
         }
     }
 
-    public Long buscaIdPorUsername(String username){
-        String sql = "select id from usuario where username=?";
+    public Usuario buscaPorUsername(String username){
+        String sql = "select * from usuario where username=?";
         try {
             PreparedStatement stmt = this.connection.prepareStatement(sql);
             stmt.setString(1, username);
             ResultSet rs = stmt.executeQuery();
-            Long id = null;
+            Usuario user = null;
             while (rs.next()) {
-                id = rs.getLong("id");
+                user = new Usuario();
+                user.setId(rs.getLong("id"));
+                user.setUsername(rs.getString("username"));
+                user.setPassword(rs.getString("password"));
             }
-            return id;
+            return user;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void delete(Usuario usuario) {
+        String sql = "delete from usuario where id=?";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setLong(1, usuario.getId());
+            stmt.execute();
+            stmt.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
