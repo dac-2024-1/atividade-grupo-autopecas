@@ -41,7 +41,7 @@
                 </select>
                 <label class="texto-basico" for="idServico">Serviço:</label>
                 <select class="campo-select input-form" id="idServico" name="idServico" required>
-                    <option value="" selected>Selecione uma peça</option>
+                    <option value="" selected>Selecione um serviço</option>
                     <c:forEach var="servico" items="${servicos}">
                         <option value="${servico.id}">${servico.id} - Descrição: ${servico.descricao} |
                                 ${servico.preco}
