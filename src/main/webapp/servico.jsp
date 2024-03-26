@@ -30,7 +30,7 @@
                 <input class="input-form" type="date" id="data" name="data" required />
                 <label class="texto-basico" for="idVeiculo">Veículo:</label>
                 <select class="campo-select input-form" id="idVeiculo" name="idVeiculo" required>
-                    <option value="" selected>Selecione um funcionário</option>
+                    <option value="" selected>Selecione um veiculo</option>
                     <c:forEach var="veiculo" items="${veiculos}">
                         <option value="${veiculo.id}">${veiculo.id} - ${veiculo.marca} ${veiculo.modelo} - Proprietário: ${veiculo.cliente.nome}</option>
                     </c:forEach>
