@@ -27,7 +27,7 @@ public class Login extends HttpServlet {
             UsuarioDao userDao = new UsuarioDao();
             if (userDao.checkPassword(user)) {
                 req.getSession().setAttribute("username", username);
-                res.sendRedirect("/");
+                res.sendRedirect("/paginaInicial.html");
                 return;
             }
 
@@ -43,7 +43,7 @@ public class Login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         if (req.getSession().getAttribute("username") != null) {
-            res.sendRedirect(req.getContextPath() + "/usuario");
+            res.sendRedirect(req.getContextPath() + "/paginaInicial.html");
         } else {
             req.getRequestDispatcher(loginPath).forward(req, res);
         }

@@ -10,22 +10,31 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <html>
 <head>
-    <title>Login</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/style/base.css">
+    <link rel="stylesheet" href="/style/loginRegistro.css">
+    <title>Login | Tonhão Autopeças</title>
 </head>
 <body>
-    <h1>Login</h1>
-    <a href="${pageContext.request.contextPath}/usuario/registro">Registre-se</a>
-    <%--@elvariable id="mensagem" type="java.lang.String"--%>
+
+<main>
+
+    <h1>Login de Usuário</h1>
+
     <c:if test="${mensagem != null and !mensagem.trim().isEmpty()}">
-        <p>${mensagem}</p>
+        <p class="texto-basico">${mensagem}</p>
     </c:if>
+
     <form action="${pageContext.request.contextPath}/usuario/login" method="post">
-        <label for="username">Nome de usuário:</label><br>
-        <input type="text" id="username" name="username"><br>
-        <label for="password">Senha:</label><br>
-        <input type="password" id="password" name="password"><br>
-        <br>
-        <input type="submit" value="Login">
+        <label class="texto-basico" for="username">Nome de usuário:</label>
+        <input class="input-form" type="text" id="username" name="username">
+        <label class="texto-basico" for="password">Senha:</label>
+        <input class="input-form" type="password" id="password" name="password">
+        <input type="submit" class="botao-padrao" value="Login">
     </form>
+
+    <a href="${pageContext.request.contextPath}/usuario/registro"><button class="botao-padrao">Registre-se</button></a>
+    <%--@elvariable id="mensagem" type="java.lang.String"--%>
+</main>
 </body>
 </html>
