@@ -82,11 +82,16 @@
                     <div class="info-atualizar">
                         <form id="form-atualizar" action="mvc" method="POST" class="update-div hide">
                             <div class="campo-atualizar">
-                                <label class="texto-basico" for="idCliente-4">Cliente:</label>
-                                <select class="campo-select input-form" id="idCliente-4" name="idCliente" required>
-                                    <option value="4" selected>4 - Mauricio Bernardo Dantas</option>
-                                    <option value="3">3 - aa</option>
-                                    <option value="5">5 - Vibes</option>
+                                <label class="texto-basico" for="idCliente-${veiculo.cliente.id}">Cliente:</label>
+                                <select class="campo-select input-form" id="idCliente-${veiculo.cliente.id}" name="idCliente"
+                                        required>
+                                    <option value="${veiculo.cliente.id}" selected>${veiculo.cliente.id}
+                                        - ${veiculo.cliente.nome}</option>
+                                    <c:forEach var="cliente" items="${clientes}">
+                                        <c:if test="${cliente.id != veiculo.cliente.id}">
+                                            <option value="${cliente.id}">${cliente.id} - ${cliente.nome}</option>
+                                        </c:if>
+                                    </c:forEach>
                                 </select>
                                 <input type="hidden" name="id" value="${veiculo.id}">
                                 <input type="hidden" name="logica" value="AtualizaVeiculo" />

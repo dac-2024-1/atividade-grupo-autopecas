@@ -20,6 +20,6 @@ public class DeletaServicoPeca implements Logica{
             req.getRequestDispatcher("/erro.jsp").forward(req, res);
         }
 
-        res.sendRedirect("servicopeca");
+        res.sendRedirect("servicoPeca");
     }
 }

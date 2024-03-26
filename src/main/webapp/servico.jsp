@@ -94,28 +94,26 @@
                                 <input class="input-form" type="date" id="data" name="data" required />
                                 <label class="texto-basico" for="idVeiculo">Veículo:</label>
                                 <select class="campo-select input-form" id="idVeiculo" name="idVeiculo" required>
-                                    <option value="" selected>Selecione um veículo:</option>
+                                    <option value="" selected>Selecione um veículo</option>
+                                    <option value="${servico.veiculo.id}" selected>${servico.veiculo.id} - ${servico.veiculo.marca} ${servico.veiculo.modelo} - Proprietário: ${servico.veiculo.cliente.nome}</option>
                                     <c:forEach var="veiculo" items="${veiculos}">
                                         <c:if test="${veiculo.id != servico.veiculo.id}">
-                                            <option value="${veiculo.id}">${veiculo.id} - ${veiculo.marca}
-                                                    ${veiculo.modelo} -
-                                                Proprietário: ${veiculo.cliente.nome}</option>
+                                            <option value="${veiculo.id}">${veiculo.id} - ${veiculo.marca} ${veiculo.modelo} - Proprietário: ${veiculo.cliente.nome}</option>
                                         </c:if>
                                     </c:forEach>
                                 </select>
                                 <label class="texto-basico" for="idFuncionario">Funcionário:</label>
-                                <select class=" campo-select input-form" id="idFuncionario" name="idFuncionario"
-                                        required>
+                                <select class="campo-select input-form" id="idFuncionario" name="idFuncionario" required>
                                     <option value="" selected>Selecione um funcionário</option>
+                                    <option value="${servico.funcionario.id}" selected>${servico.funcionario.id} - ${servico.funcionario.nome}</option>
                                     <c:forEach var="funcionario" items="${funcionarios}">
                                         <c:if test="${funcionario.id != servico.funcionario.id}">
-                                            <option value="${funcionario.id}">${funcionario.id} - ${funcionario.nome}
-                                            </option>
+                                            <option value="${funcionario.id}">${funcionario.id} - ${funcionario.nome}</option>
                                         </c:if>
                                     </c:forEach>
                                 </select>
                                 <input type="hidden" name="id" value="${servico.id}">
-                                <input type="hidden" name="logica" value="AtualizaCliente" />
+                                <input type="hidden" name="logica" value="AtualizaServico" />
                                 <input id="botao-atualizar" class="botao-padrao" type="submit" value="Atualizar"
                                        class="submit update" />
                             </div>
