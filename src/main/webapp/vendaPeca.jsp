@@ -64,10 +64,10 @@
                     <div class="bloco-conteudo">
                             <div class="bloco-info-conteudo">
                                 <p class="texto-basico">ID: ${vendaPeca.id}</p>
-                                <p class="texto-basico">Venda: ${vendaPeca.venda.id}</p>
+                                <p class="texto-basico">ID da Venda: ${vendaPeca.venda.id}</p>
                                 <p class="texto-basico">Data da venda: ${vendaPeca.venda.data}</p>
                                 <p class="texto-basico">Valor total da venda: ${vendaPeca.venda.totalVenda}</p>
-                                <p class="texto-basico">Peça: ${vendaPeca.peca.id}</p>
+                                <p class="texto-basico">ID da Peça: ${vendaPeca.peca.id}</p>
                                 <p class="texto-basico">Nome da peça: ${vendaPeca.peca.nome}</p>
                                 <p class="texto-basico">Descrição da peça: ${vendaPeca.peca.descricao}</p>
                             </div>
