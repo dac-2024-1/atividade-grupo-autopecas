@@ -46,9 +46,9 @@
 
         <div id="div-listar">
             <form action="funcionario" method="GET" class="search-form">
-                <label class="texto-basico">Buscar funcionário por id:</label>
+                <label class="texto-basico" for="id">Buscar funcionário por id:</label>
                 <div id="campo-busca">
-                    <input class="input-form" type="text" placeholder="Buscar funcionário por id..." name="id">
+                    <input class="input-form" id="id" type="text" placeholder="Buscar funcionário por id..." name="id">
                     <button id="botao-buscar" class="search-button" type="submit">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                              fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"
@@ -66,7 +66,7 @@
                         <div class="bloco-info-conteudo">
                             <p class="texto-basico">ID: ${funcionario.id}</p>
                             <p class="texto-basico">Nome: ${funcionario.nome}</p>
-                            <p class="texto-basico">Cargo: ${funcionario.cargp}</p>
+                            <p class="texto-basico">Cargo: ${funcionario.cargo}</p>
                             <p class="texto-basico">Endereço: ${funcionario.endereco}</p>
                             <p class="texto-basico">Telefone: ${funcionario.telefone}</p>
                             <p class="texto-basico">Salario: ${funcionario.salario}</p>

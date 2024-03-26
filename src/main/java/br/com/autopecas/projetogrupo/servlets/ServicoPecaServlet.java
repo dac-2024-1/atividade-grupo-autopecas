@@ -80,7 +80,7 @@ public class ServicoPecaServlet extends HttpServlet {
                 servicosPecas.add(servicoPeca);
             }
         }
-        req.getRequestDispatcher("/servicopeca.jsp").forward(req, res);
+        req.getRequestDispatcher("/servicoPeca.jsp").forward(req, res);
     }
 
 }

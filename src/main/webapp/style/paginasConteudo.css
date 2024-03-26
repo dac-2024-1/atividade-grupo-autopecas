@@ -72,12 +72,14 @@ form {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    width: 400px;
-    max-width: 400px;
+    width: 450px;
     height: 430px;
     max-height: 430px;
 }
 
+#div-form {
+    overflow: auto;
+}
 #div-listar {
     gap: 5px;
 }
