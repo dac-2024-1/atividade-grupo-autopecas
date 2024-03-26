@@ -82,10 +82,10 @@
                     <div class="info-atualizar">
                         <form id="form-atualizar" action="mvc" method="POST" class="update-div hide">
                             <div class="campo-atualizar">
-                                <label for="preco-update">Preço:</label>
-                                <input class="input" type="text" id="preco-update" name="preco" required />
-                                <label for="quantidade-update">Quantidade em estoque:</label>
-                                <input class="input" type="text" id="quantidade-update" name="quantidadeEstoque"
+                                <label class="texto-basico" for="preco-update">Preço:</label>
+                                <input class="input-form" class="input" type="text" id="preco-update" name="preco" required />
+                                <label class="texto-basico" for="quantidade-update">Quantidade em estoque:</label>
+                                <input class="input-form" class="input" type="text" id="quantidade-update" name="quantidadeEstoque"
                                        required />
                                 <input type="hidden" name="id" value="${peca.id}">
                                 <input type="hidden" name="logica" value="AtualizaPeca" />
