@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet(name = "servicoPeca", urlPatterns = "/servicopeca")
+@WebServlet(name = "servicoPeca", urlPatterns = "/servicoPeca")
 public class ServicoPecaServlet extends HttpServlet {
 
     @Override
@@ -46,7 +46,7 @@ public class ServicoPecaServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        res.sendRedirect("servicopeca");
+        res.sendRedirect("servicoPeca");
 
     }
 
@@ -55,7 +55,11 @@ public class ServicoPecaServlet extends HttpServlet {
         ServicoPecaDao dao;
         try {
             dao = new ServicoPecaDao();
+            PecaDao pecaDao = new PecaDao();
+            ServicoDao servicoDao = new ServicoDao();
             req.setAttribute("servicospecas", dao.buscaTodosServicoPeca());
+            req.setAttribute("servicos", servicoDao.buscaTodosServicos());
+            req.setAttribute("pecas", pecaDao.BuscaTodasPecas());
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -80,6 +84,7 @@ public class ServicoPecaServlet extends HttpServlet {
                 servicosPecas.add(servicoPeca);
             }
         }
+
         req.getRequestDispatcher("/servicoPeca.jsp").forward(req, res);
     }
 

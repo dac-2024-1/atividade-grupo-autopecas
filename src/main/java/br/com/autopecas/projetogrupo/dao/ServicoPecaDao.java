@@ -85,7 +85,7 @@ public class ServicoPecaDao {
     }
 
     public void deletaServicoPeca(Long id){
-        String sql = "delete from servicopeca where id=?";
+        String sql = "delete * from servicopeca where id=?";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setLong(1,id);
