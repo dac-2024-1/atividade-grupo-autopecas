@@ -18,7 +18,7 @@
 <main class="container">
     <div class="content">
         <h1 class="title">Cadastrar peças usadas em serviços</h1>
-        <form action="servicopeca" method="POST" class="form">
+        <form action="servicoPeca" method="POST" class="form">
             <label for="idPeca">Peça:</label>
             <input class="input" type="text" id="idPeca" name="idPeca" required/><br/><br/>
             <label for="idServico">Serviço:</label>
@@ -29,7 +29,7 @@
     </div>
     <div class="content" id="col2">
         <div>
-            <form action="servicopeca" method="GET" class="search-form">
+            <form action="servicoPeca" method="GET" class="search-form">
                 <input type="text" class="search-input" placeholder="Buscar peças usadas em serviço por id..."
                        name="id">
                 <button class="search-button" type="submit">
